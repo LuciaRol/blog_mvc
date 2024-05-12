@@ -1,0 +1,23 @@
+{
+    "name": "lucia/blog",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Lucia\\blog_mvc\\": "./",
+            "Controllers\\" : "./Controllers",
+            "Models\\": "./Models",
+            "Lib\\":"./Lib",
+            "Repositories\\":"./Repositories",
+            "Services\\":"./Services"
+        }
+    },
+    "authors": [
+        {
+            "name": "luciarodriguez"
+        }
+    ],
+    "require": {
+        "stefangabos/zebra_pagination": "^2.4",
+        "vlucas/phpdotenv": "^5.6"
+    }
+}
