@@ -12,7 +12,7 @@ CREATE TABLE usuarios (
     apellidos VARCHAR(100),
     email VARCHAR(255) NOT NULL UNIQUE,
     username VARCHAR(50) NOT NULL UNIQUE, -- Nombre de usuario
-    password VARCHAR(255),
+    contrasena VARCHAR(255),
     rol ENUM('admin', 'usur') NOT NULL -- Campo para el rol del usuario
 ) ENGINE=INNODB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

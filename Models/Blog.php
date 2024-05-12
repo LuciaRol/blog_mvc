@@ -18,6 +18,45 @@ public function __construct(string $concepto, string $fecha, float $importe, arr
     $this->todosLosDatos = [];
 }
 
+
+public static function fromArray(array $data): Blog
+    {
+        return new Blog(
+            $data['id'] ?? null,
+            $data['id_usuario'] ?? null,
+            $data['titulo'] ?? "",
+            $data['descripcion'] ?? '',
+            
+        );
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public function getConcepto(): string {
         return $this->concepto;
     }
@@ -53,6 +92,39 @@ public function __construct(string $concepto, string $fecha, float $importe, arr
     }
 
     
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    # Esto es de monedero
     public static function leerRegistros(): array {
         // Leer el contenido del archivo Blog.txt si existe
         if (file_exists("Blog.txt")) {

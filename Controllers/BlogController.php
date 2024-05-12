@@ -2,6 +2,7 @@
 namespace Controllers;
 
 use Lib\Pages;
+use Lib\DataBase;
 use Models\Blog;
 class BlogController {
 
@@ -12,6 +13,26 @@ class BlogController {
         // Crea una nueva Pages
         $this->pagina = new Pages();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public function mostrarBlog(array $errores = null): void {
