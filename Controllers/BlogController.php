@@ -24,7 +24,13 @@ class BlogController {
 
         // Aquí puedes utilizar las entradas obtenidas para mostrarlas en la página
         // Por ejemplo, podrías iterar sobre $entradas y mostrar los detalles de cada entrada
-        
+        echo "<h1>Entradas</h1>";
+        echo "<ul>";
+        foreach ($entradas as $entrada) {
+            echo "<li>" . $entrada['usuario_id'] . " - " . $entrada['titulo'] . "</li>";
+        }
+        echo "</ul>";
+
         
 
         // Puedes continuar agregando más lógica para mostrar el contenido del blog aquí
