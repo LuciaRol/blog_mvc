@@ -1,8 +1,10 @@
 -- Insertar usuarios
-INSERT INTO usuarios (nombre, apellidos, email, password) VALUES
-('Juan', 'Pérez', 'juan@example.com', 'contraseña123'),
-('María', 'González', 'maria@example.com', 'clave456'),
-('Pedro', 'Martínez', 'pedro@example.com', 'secreto789');
+
+INSERT INTO usuarios (nombre, apellidos, email, username, password, rol) VALUES
+('Juan', 'Pérez', 'juan@example.com', 'juan', 'contraseña123', 'admin'),
+('María', 'González', 'maria@example.com', 'maria', 'clave456', 'usur'), 
+('Pedro', 'Martínez', 'pedro@example.com', 'pedro', 'secreto789', 'usur'); 
+
 
 -- Insertar categorías
 INSERT INTO categorias (nombre) VALUES
