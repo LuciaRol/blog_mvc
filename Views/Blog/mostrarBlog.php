@@ -1,9 +1,9 @@
 <?php
     // Incluir el controlador
-    use Controllers\MonederoController;
+    use Controllers\BlogController;
 
     // Crear una instancia del controlador
-    $monederoController = new MonederoController();
+    $BlogController = new BlogController();
   
 ?>
 
@@ -13,16 +13,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monedero</title>
+    <title>Blog</title>
 </head>
 
 <body>       
     
 <table>
     <tr>
-        <th class="subtitle subtitle2"><a href="<?=BASE_URL?>?controller=Monedero&action=mostrarMonedero&orden=concepto">Concepto</a></th>
-        <th class="subtitle subtitle2"><a href="<?=BASE_URL?>?controller=Monedero&action=mostrarMonedero&orden=fecha">Fecha</a></th>
-        <th class="subtitle subtitle2"><a href="<?=BASE_URL?>?controller=Monedero&action=mostrarMonedero&orden=importe">Importe (&euro;)</a></th>
+        <th class="subtitle subtitle2"><a href="<?=BASE_URL?>?controller=Blog&action=mostrarBlog&orden=concepto">Concepto</a></th>
+        <th class="subtitle subtitle2"><a href="<?=BASE_URL?>?controller=Blog&action=mostrarBlog&orden=fecha">Fecha</a></th>
+        <th class="subtitle subtitle2"><a href="<?=BASE_URL?>?controller=Blog&action=mostrarBlog&orden=importe">Importe (&euro;)</a></th>
         <th class="subtitle">Operaciones</th>
     </tr>
 
@@ -36,14 +36,14 @@
                     <!-- Dentro del bucle foreach para mostrar registros -->
                     <button type="button" class="btn editar-btn" data-id="<?= $registro['id'] ?>">Editar</button>
 
-                    <form action="<?=BASE_URL?>?controller=Monedero&action=borrarRegistro" method="POST">
+                    <form action="<?=BASE_URL?>?controller=Blog&action=borrarRegistro" method="POST">
                         <button class="btn" name="borrar" value="<?= $registro['id'] ?>">Borrar</button>
                     </form>
                 </div>                
             </td>
         </tr>
         <tr class="edicion-campos" style="display: none;">
-            <form action="<?=BASE_URL?>?controller=Monedero&action=modificarRegistro" method="post">
+            <form action="<?=BASE_URL?>?controller=Blog&action=modificarRegistro" method="post">
                 <!-- Campos ocultos para enviar el ID del registro -->
                 <input type="hidden" name="id" value="<?= $registro['id'] ?>">
                 <td><input type="text" name="concepto_editado" placeholder="Nuevo concepto"></td>
@@ -55,7 +55,7 @@
 
     <?php endforeach; ?>
 
-    <form action="<?=BASE_URL?>?controller=Monedero&action=guardarRegistro" method="POST">
+    <form action="<?=BASE_URL?>?controller=Blog&action=guardarRegistro" method="POST">
         <td>
             <input type="text" name="concepto" placeholder="Concepto">
             <p class="error"></p>
@@ -88,7 +88,7 @@
 
 <div id="buscarConcepto">
     <p>Buscar por concepto: </p>
-    <form action="<?=BASE_URL?>?controller=Monedero&action=buscarRegistro" method="POST">
+    <form action="<?=BASE_URL?>?controller=Blog&action=buscarRegistro" method="POST">
         <input class="buscar" type="text" name="buscar">
         <button class="btn" type="submit">Buscar</button>
     </form>
@@ -98,11 +98,11 @@
     
 <div class="anotaciones">
     <div>
-        <p>El numero total de registros es: <?= $monederoController->contarTotalRegistros() ?></p>
-        <p id="balance">El balance total es de <?= $monederoController->calcularBalanceTotal() ?> &euro;</p>
+        <p>El numero total de registros es: <?= $BlogController->contarTotalRegistros() ?></p>
+        <p id="balance">El balance total es de <?= $BlogController->calcularBalanceTotal() ?> &euro;</p>
     </div>
-    <button class="btn"><a href="<?=BASE_URL?>?controller=Monedero&action=mostrarMonedero">Ver todas las anotaciones</a></button> 
-    <!-- No asignamos valor a orden para volver al original de monedero.txt -->
+    <button class="btn"><a href="<?=BASE_URL?>?controller=Blog&action=mostrarBlog">Ver todas las anotaciones</a></button> 
+    <!-- No asignamos valor a orden para volver al original de Blog.txt -->
 </div>
 
 <!-- SCRIPT JS PARA QUE SE MUESTRE EL FORMULARIO PARA EDITAR CUANDO SE PULSA EL BOTÓN "EDITAR" -->

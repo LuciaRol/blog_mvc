@@ -4,7 +4,7 @@ namespace Models;
 use DateTime;
 use Lib\Pages;
 
-class monedero{
+class Blog{
     private string $concepto;
     private string $fecha;
     private float $importe;
@@ -54,10 +54,10 @@ public function __construct(string $concepto, string $fecha, float $importe, arr
 
     
     public static function leerRegistros(): array {
-        // Leer el contenido del archivo monedero.txt si existe
-        if (file_exists("monedero.txt")) {
+        // Leer el contenido del archivo Blog.txt si existe
+        if (file_exists("Blog.txt")) {
             // Leer el contenido del archivo y dividirlo en líneas
-            $lineas = file("monedero.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            $lineas = file("Blog.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
             // Procesar cada línea para obtener los datos individuales
             $registros = [];
@@ -93,7 +93,7 @@ public function __construct(string $concepto, string $fecha, float $importe, arr
         $id = $ultimoId + 1;
 
         // Abrir el archivo en modo escritura (si no existe, se creará)
-        $archivo = fopen("monedero.txt", "a");
+        $archivo = fopen("Blog.txt", "a");
 
         // Escribir los datos del formulario junto con el ID en el archivo
         fwrite($archivo, "$id,$concepto,$fecha,$importe\n");
@@ -123,7 +123,7 @@ public function __construct(string $concepto, string $fecha, float $importe, arr
             $registros = array_values($registros);
 
             // Escribir los registros actualizados de vuelta al archivo
-            $archivo = fopen("monedero.txt", "w");
+            $archivo = fopen("Blog.txt", "w");
             foreach ($registros as $registro) {
                 fwrite($archivo, implode(",", $registro) . "\n");
             }
@@ -147,10 +147,10 @@ public function __construct(string $concepto, string $fecha, float $importe, arr
     }
 
     public static function contarTotalRegistros(): int {
-        // Leer el contenido del archivo monedero.txt si existe
-        if (file_exists("monedero.txt")) {
+        // Leer el contenido del archivo Blog.txt si existe
+        if (file_exists("Blog.txt")) {
             // Leer el contenido del archivo y dividirlo en líneas
-            $lineas = file("monedero.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
+            $lineas = file("Blog.txt", FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
 
             // Contar el número de registros (líneas)
             $totalRegistros = count($lineas);
@@ -162,7 +162,7 @@ public function __construct(string $concepto, string $fecha, float $importe, arr
     }
 
     public static function calcularBalanceTotal(): float {
-        // Leer los registros del archivo monedero.txt
+        // Leer los registros del archivo Blog.txt
         $registros = self::leerRegistros();
         
         // Inicializar la variable para almacenar el balance total
@@ -306,7 +306,7 @@ public function __construct(string $concepto, string $fecha, float $importe, arr
             $registros[$registroEncontrado]['importe'] = $nuevoImporte;
     
             // Escribir los registros actualizados de vuelta al archivo
-            $archivo = fopen("monedero.txt", "w");
+            $archivo = fopen("Blog.txt", "w");
             foreach ($registros as $registro) {
                 fwrite($archivo, implode(",", $registro) . "\n");
             }

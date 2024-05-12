@@ -2,8 +2,8 @@
 namespace Controllers;
 
 use Lib\Pages;
-use Models\Monedero;
-class MonederoController {
+use Models\Blog;
+class BlogController {
 
     private Pages $pagina;
 
@@ -14,23 +14,23 @@ class MonederoController {
     }
 
 
-    public function mostrarMonedero(array $errores = null): void {
+    public function mostrarBlog(array $errores = null): void {
         // Obtener el valor de $orden de $_GET
         $orden = isset($_GET['orden']) ? $_GET['orden'] : null;
         
-        // Leer los datos del archivo monedero.txt
-        $registros = monedero::leerRegistros();
+        // Leer los datos del archivo Blog.txt
+        $registros = Blog::leerRegistros();
         
         // Ordenar los registros según el valor de $orden
-        $registros = monedero::ordenarRegistros($registros, $orden);
+        $registros = Blog::ordenarRegistros($registros, $orden);
 
         // Instanciar la clase Pages para renderizar la vista
-        $this->pagina->render("Monedero/mostrarMonedero", ['registros' => $registros, 'errores' => $errores]);
+        $this->pagina->render("Blog/mostrarBlog", ['registros' => $registros, 'errores' => $errores]);
     }
     public function guardarRegistro(): void {
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["concepto"], $_POST["fecha"], $_POST["importe"])) {
              // Obtener los datos del formulario y los saneamos
-            $datosSaneados = Monedero::sanearCampos($_POST["concepto"], $_POST["fecha"], $_POST["importe"]);
+            $datosSaneados = Blog::sanearCampos($_POST["concepto"], $_POST["fecha"], $_POST["importe"]);
             
             // Actualizar los campos concepto, fecha e importe con los valores saneados
             $concepto = $datosSaneados['concepto'];
@@ -39,19 +39,19 @@ class MonederoController {
 
 
             // Aquí tiene que ir toda la validación 
-            $errores = Monedero::validacion($concepto, $fecha, $importe);
+            $errores = Blog::validacion($concepto, $fecha, $importe);
             
             // Si hay errores de validación, mostrar los mensajes de error y detener el proceso
             if ($errores !== null) {
-                $this->mostrarMonedero($errores); // Pasar los mensajes de error a la vista
+                $this->mostrarBlog($errores); // Pasar los mensajes de error a la vista
                 return;
                 }
            
-            // Llamar a la función guardarRegistro() de Monedero para guardar el registro
-            Monedero::guardarRegistro($concepto, $fecha, $importe);
+            // Llamar a la función guardarRegistro() de Blog para guardar el registro
+            Blog::guardarRegistro($concepto, $fecha, $importe);
 
             // Volvemos a redirigir al usuario
-            self:: mostrarMonedero();
+            self:: mostrarBlog();
         }
     }
     public function borrarRegistro(): void {
@@ -60,13 +60,13 @@ class MonederoController {
         // Obtener el ID del registro a borrar desde el POST
         $id = $_POST['borrar'];
 
-        // falta validar que el id obtenido es correcto y está incluido dentro del monedero.txt
+        // falta validar que el id obtenido es correcto y está incluido dentro del Blog.txt
 
-        Monedero::borrarRegistro($id);
+        Blog::borrarRegistro($id);
         }
 
-    // Redirigir al usuario de vuelta a la página mostrarMonedero.php después de borrar el registro
-    self::mostrarMonedero();
+    // Redirigir al usuario de vuelta a la página mostrarBlog.php después de borrar el registro
+    self::mostrarBlog();
     }
 
     // Función para editar un registro
@@ -79,30 +79,30 @@ class MonederoController {
             $nuevoImporte = $_POST["importe_editado"];
     
             // Saneamos los campos datos del formulario para editar
-            $datosSaneados = Monedero::sanearCampos($nuevoConcepto, $nuevaFecha, $nuevoImporte);
+            $datosSaneados = Blog::sanearCampos($nuevoConcepto, $nuevaFecha, $nuevoImporte);
             $nuevoConcepto = $datosSaneados['concepto'];
             $nuevaFecha = $datosSaneados['fecha'];
             $nuevoImporte = $datosSaneados['importe'];
     
             // Validamos los nuevos datos
-            $errores = Monedero::validacion($nuevoConcepto, $nuevaFecha, $nuevoImporte);
+            $errores = Blog::validacion($nuevoConcepto, $nuevaFecha, $nuevoImporte);
     
             // Si hay errores de validación, mostrar los mensajes de error y detener el proceso
             if ($errores !== null) {
-                self::mostrarMonedero($errores); // Pasar los mensajes de error a la vista
+                self::mostrarBlog($errores); // Pasar los mensajes de error a la vista
                 return;
             }
     
-            // Llamar al método editarRegistro de Monedero para actualizar el registro
-            Monedero::editarRegistro($id, $nuevoConcepto, $nuevaFecha, $nuevoImporte);
+            // Llamar al método editarRegistro de Blog para actualizar el registro
+            Blog::editarRegistro($id, $nuevoConcepto, $nuevaFecha, $nuevoImporte);
     
-            // Redirigir de vuelta a la vista mostrarMonedero.php después de editar el registro
-            self::mostrarMonedero();
+            // Redirigir de vuelta a la vista mostrarBlog.php después de editar el registro
+            self::mostrarBlog();
         }
     }
     
     
-    // Función para buscar un registro. Llama a la clase monedero donde se guarda la lógica sobre como buscar.
+    // Función para buscar un registro. Llama a la clase Blog donde se guarda la lógica sobre como buscar.
     public function buscarRegistro(): void {
         // Verificar si se ha enviado la consulta de búsqueda
         if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["buscar"])) {
@@ -110,22 +110,22 @@ class MonederoController {
             $terminoBusqueda = $_POST["buscar"];
     
             // Leer los registros actuales para realizar la búsqueda
-            $resultados = Monedero::buscarRegistros($terminoBusqueda);
+            $resultados = Blog::buscarRegistros($terminoBusqueda);
     
            // Instanciar la clase Pages para renderizar la vista
-           $this->pagina->render("Monedero/mostrarMonedero", ['registros' => $resultados]);
+           $this->pagina->render("Blog/mostrarBlog", ['registros' => $resultados]);
         } 
     }
-    // Función controlador para contar el número de registros. Llama a la clase monedero donde se guarda la lógica sobre como contar los registros.
+    // Función controlador para contar el número de registros. Llama a la clase Blog donde se guarda la lógica sobre como contar los registros.
 
     public function contarTotalRegistros(): int {
-        // Llamar a la función contarTotalRegistros() de Monedero
-        return Monedero::contarTotalRegistros();
+        // Llamar a la función contarTotalRegistros() de Blog
+        return Blog::contarTotalRegistros();
     }
-    // Función controlador para calcular el balance. Llama a la clase monedero donde se guarda la lógica sobre como calcular el balance.
+    // Función controlador para calcular el balance. Llama a la clase Blog donde se guarda la lógica sobre como calcular el balance.
     public function calcularBalanceTotal(): float {
-        // Llamar a la función calcularBalanceTotal() de Monedero
-        return Monedero::calcularBalanceTotal();
+        // Llamar a la función calcularBalanceTotal() de Blog
+        return Blog::calcularBalanceTotal();
     }
 
 

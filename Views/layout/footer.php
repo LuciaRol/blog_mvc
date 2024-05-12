@@ -1,1 +1,1 @@
-<h6>2024 Monedero - Lucía Rodríguez López</h6>
+<h6>2024 Blog - Lucía Rodríguez López</h6>
