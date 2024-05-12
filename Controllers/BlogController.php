@@ -28,11 +28,14 @@ class BlogController {
         echo "<ul>";
         foreach ($entradas as $entrada) {
             echo "<li>" . 
-                 "Usuario ID: " . $entrada['usuario_id'] . ", " . 
-                 "Categoría ID: " . $entrada['categoria_id'] . ", " . 
-                 "Título: " . $entrada['titulo'] . ", " . 
-                 "Descripción: " . $entrada['descripcion'] . ", " . 
-                 "Fecha: " . $entrada['fecha'] . 
+                 "Usuario ID: " . $entrada['titulo'] . ", " . 
+                 "Categoría ID: " . $entrada['descripcion'] . ", " . 
+                 "Título: " . $entrada['nombre'] . ", " . 
+                 "Descripción: " . $entrada['apellidos'] . ", " . 
+                 "Fecha: " . $entrada['email'] . 
+                 "Fecha: " . $entrada['username'] . 
+                 "Fecha: " . $entrada['rol'] . 
+                 "Fecha: " . $entrada['categoria'] . 
                  "</li>";
         }
         echo "</ul>";

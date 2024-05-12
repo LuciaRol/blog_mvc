@@ -12,12 +12,21 @@
         public function findAll() {
             $entradaCommit = null;
             try {
-                $this->sql = $this->conection->prepareSQL("SELECT *
+                $this->sql = $this->conection->prepareSQL("SELECT   	
+                                                                entradas.titulo,
+                                                                entradas.descripcion,
+                                                                entradas.fecha,
+                                                                usuarios.nombre,
+                                                                usuarios.apellidos,
+                                                                usuarios.email,
+                                                                usuarios.username,	
+                                                                usuarios.rol,
+                                                                categorias.nombre as categoria
                                                             FROM entradas 
                                                             inner join usuarios
-                                                                on usuarios.id = entradas.usuario_id
+                                                            on usuarios.id = entradas.usuario_id
                                                             inner join categorias
-                                                                on categorias.id = entradas.categoria_id");
+                                                            on categorias.id = entradas.categoria_id");
                 
                 $this->sql->execute();
                 $entradaCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
