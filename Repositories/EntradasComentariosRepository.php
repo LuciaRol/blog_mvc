@@ -9,11 +9,16 @@
         function __construct(){
             $this->conection = new DataBase();
         }
-        public function findAll($usuario_id) {
+        public function findAll() {
             $entradaCommit = null;
             try {
-                $this->sql = $this->conection->prepareSQL("SELECT * FROM entradas WHERE usuario_id = :usuario_id");
-                $this->sql->bindValue(":usuario_id", $usuario_id);
+                $this->sql = $this->conection->prepareSQL("SELECT *
+                                                            FROM entradas 
+                                                            inner join usuarios
+                                                                on usuarios.id = entradas.usuario_id
+                                                            inner join categorias
+                                                                on categorias.id = entradas.categoria_id");
+                
                 $this->sql->execute();
                 $entradaCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
                 $this->sql->closeCursor();

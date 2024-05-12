@@ -27,12 +27,15 @@ class BlogController {
         echo "<h1>Entradas</h1>";
         echo "<ul>";
         foreach ($entradas as $entrada) {
-            echo "<li>" . $entrada['usuario_id'] . " - " . $entrada['titulo'] . "</li>";
+            echo "<li>" . 
+                 "Usuario ID: " . $entrada['usuario_id'] . ", " . 
+                 "Categoría ID: " . $entrada['categoria_id'] . ", " . 
+                 "Título: " . $entrada['titulo'] . ", " . 
+                 "Descripción: " . $entrada['descripcion'] . ", " . 
+                 "Fecha: " . $entrada['fecha'] . 
+                 "</li>";
         }
         echo "</ul>";
-
-        
-
         // Puedes continuar agregando más lógica para mostrar el contenido del blog aquí
     }
 

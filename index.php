@@ -15,6 +15,7 @@
         // Cargamos el .env donde se almacenan de forma segura los usuarios y contraseña de bbdd
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
         $dotenv->load();
+        
         use Controllers\FrontController;
         FrontController::main();
     ?>

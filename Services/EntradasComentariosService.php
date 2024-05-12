@@ -11,10 +11,6 @@
             $this->repository = new entradasComentariosRepository();
         }
     
-        public function searchRutaId($id) {
-            return $this->repository->findAll($id);
-        }
-    
         public function addCommit(array $data):void {
             $this->repository->addCommit($data);
         }
@@ -25,7 +21,7 @@
     
         public function findAll(): ?array {
             // Llama al método findAll() del repositorio EntradasComentariosRepository
-            return $this->repository->findAll(1); // Cambiado entradasComentariosRepository a $repository
+            return $this->repository->findAll(); // Cambiado entradasComentariosRepository a $repository
         }
     }
 ?>
