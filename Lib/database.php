@@ -5,7 +5,7 @@ use PDOException;
 
 class DataBase
 {
-    private PDO $conexion;
+    private ?PDO $conexion;
     private mixed $result; 
     private string $server;
     private string $user;
