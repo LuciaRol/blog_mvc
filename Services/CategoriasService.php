@@ -1,20 +1,20 @@
 <?php
     namespace Services;
-    use Repositories\entradasRepository;
-    class RutasService{
+    use Repositories\categoriasRepository;
+    class CategoriasService{
         // Creando variable con
-        private entradasRepository $repository;
+        private categoriasRepository $repository;
         function __construct() {
-            $this->repository = new entradasRepository();
+            $this->repository = new categoriasRepository();
         }
 
-        public function allRutas() :?array {
+        public function allCategorias() :?array {
             return $this->repository->findAll();
         }
         public function addCategoria($data) :void {
             $this->repository->addCategoria($data);
         }
-        public function countRutas() :?int {
+        public function countCategorias() :?int {
             return $this->repository->countCategorias();
         }
         

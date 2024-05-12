@@ -4,7 +4,7 @@
     use Models\Blog;
     use PDOException;
     use PDO;
-    class entradasRepository{
+    class categoriasRepository{
         private DataBase $conection;
         private mixed $sql;
         function __construct(){

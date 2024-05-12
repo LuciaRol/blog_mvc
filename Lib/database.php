@@ -6,17 +6,17 @@ use PDOException;
 class DataBase
 {
     private PDO $conexion;
-    private mixed $result; // mixed all values
+    private mixed $result; 
     private string $server;
     private string $user;
     private string $pass;
     private string $data_base;
     function __construct()
     {
-        $this->server = $_ENV['DB_HOST'];
-        $this->user = $_ENV['DB_USER'];
-        $this->pass = $_ENV['DB_PASS'];
-        $this->data_base = $_ENV['DB_DATABASE'];
+        $this->server = 'localhost'; #$_ENV['DB_HOST'];
+        $this->user = 'admin'; #$_ENV['DB_USER'];
+        $this->pass = 'admin'; #$_ENV['DB_PASS'];
+        $this->data_base = 'blog'; #$_ENV['DB_DATABASE'];
         $this->conexion = $this->conect();
     }
     function conect() : PDO {
