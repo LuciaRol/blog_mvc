@@ -3,7 +3,7 @@
     use Controllers\BlogController;
 
     // Crear una instancia del controlador
-    $BlogController = new BlogController();
+    //$BlogController = new BlogController();
   
 ?>
 
@@ -16,7 +16,9 @@
     <title>Blog</title>
 </head>
 
-<body>       
+<body>   
+    
+    <h2>ESTE ES EL BODY DEL BLOG</h2>
 
 </body>
 
