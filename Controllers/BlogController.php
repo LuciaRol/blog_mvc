@@ -22,7 +22,7 @@ class BlogController {
         // Obtén todas las entradas desde el servicio
         //$entradas = $this->entradasService->findAll();
 
-        // Aquí puedes utilizar las entradas obtenidas para mostrarlas en la página
+         // Aquí puedes utilizar las entradas obtenidas para mostrarlas en la página
         // Por ejemplo, podrías iterar sobre $entradas y mostrar los detalles de cada entrada
         // echo "<h1>Entradas</h1>";
         // echo "<ul>";
