@@ -3,7 +3,7 @@
     use Controllers\BlogController;
 
     // Crear una instancia del controlador
-    //$BlogController = new BlogController();
+    $BlogController = new BlogController();
   
 ?>
 
@@ -23,6 +23,15 @@
     <main class="grid-container">
         <div class="content">
             <h2>Últimos artículos</h2>
+                <ul>
+                    <?php foreach ($entradas as $entrada): ?>
+                        <li>
+                            <h3><?php echo $entrada['titulo']; ?></h3>
+                            <p><?php echo $entrada['descripcion']; ?></p>
+                            <!-- Agregar más detalles de la entrada según sea necesario -->
+                        </li>
+                    <?php endforeach; ?>
+                </ul>
         </div>
 
 
