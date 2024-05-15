@@ -1,28 +1,28 @@
 
-<header>
-    <div>
-        <div>
-            <div><img src="" alt=""></div>
-            <h1>Blog</h1>
+<header class="header">
+    <div class="header_first_div">
+        <div class="header_principal">
+            <div ><img class="principal_logo" src="Assets/img/nebulosa.png" alt=""></div>
+            <h1 class="principal_title">Blog</h1>
         </div>
-        <nav>
-            <a href="">Inicio</a>
-            <a href="">Enlace 1</a>
-            <a href="">Enlace 2</a>
-            <a href="">Enlace 3</a>
-            <a href="">Contato</a>
+        <nav class="nav_container">
+            <a class="nav_link" href="">Inicio</a>
+            <a class="nav_link" href="">Enlace 1</a>
+            <a class="nav_link" href="">Enlace 2</a>
+            <a class="nav_link" href="">Enlace 3</a>
+            <a class="nav_link" href="">Contacto</a>
         </nav>
     </div>
 
-    <div>
-        <div>
-            <label for="buscar">Buscar</label>
-            <input type="text" placeholder="Busca">
+    <div class="header_second_div">
+        <div class="search_container">
+            <label class="search_label" for="buscar">Buscar</label>
+            <input class="search_input" type="text" placeholder="Busca">
         </div>
-        <div>
-            <input type="text" placeholder="usuario">
-            <input type="text" placeholder="">
-            <button for="login">Iniciar sesión</button>
+        <div class="login_container">
+            <input class="login_user" type="text" placeholder="Usuario">
+            <input class="login_pass" type="text" placeholder="Contraseña">
+            <button class="login_btn" for="login">Iniciar sesión</button>
         </div>
     </div>
 </header>

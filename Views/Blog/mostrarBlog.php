@@ -18,7 +18,25 @@
 
 <body>   
     
-    <h2>ESTE ES EL BODY DEL BLOG</h2>
+    
+
+    <main class="grid-container">
+        <div class="content">
+            <h2>Últimos artículos</h2>
+        </div>
+
+
+        <aside class="sidebar">
+            <h3 class="sidebar_title">¡Regístrate ahora!</h3>
+            <div class="sidebar_inputs">
+                <input type="text" class="sidebar_input" placeholder="Nombre">
+                <input type="text" class="sidebar_input" placeholder="Apellidos">
+                <input type="email" class="sidebar_input" placeholder="Email">
+                <input type="password" class="sidebar_input" placeholder="Contraseña">
+                <button type="submit" class="sidebar_btn">Registrarse</button>
+            </div>
+        </aside>
+    </main>
 
 </body>
 
