@@ -19,11 +19,15 @@
     <main class="grid-container">
         <div class="content">
             <h2>Últimos artículos</h2>
-            <?php if (!empty($searchQuery)): ?>
-                <h3>Resultados de búsqueda para "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</h3>
-                <?php if (!empty($resultadosBusqueda)): ?>
+            <?php if ($noResults): ?>
+                <p>No se ha encontrado nada con la palabra "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</p>
+            <?php else: ?>
+                <?php if (!empty($searchQuery)): ?>
+                    <h3>Resultados de búsqueda para "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</h3>
+                <?php endif; ?>
+                <?php if (!empty($entradas)): ?>
                     <ul>
-                        <?php foreach ($resultadosBusqueda as $entrada): ?>
+                        <?php foreach ($entradas as $entrada): ?>
                             <li>
                                 <h3><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h3>
                                 <p><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
@@ -31,18 +35,10 @@
                         <?php endforeach; ?>
                     </ul>
                 <?php else: ?>
-                    <p>No se encontraron resultados.</p>
+                    <p>No hay entradas disponibles.</p>
                 <?php endif; ?>
-            <?php else: ?>
-                <ul>
-                    <?php foreach ($entradas as $entrada): ?>
-                        <li>
-                            <h3><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                            <p><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
-                        </li>
-                    <?php endforeach; ?>
-                </ul>
             <?php endif; ?>
+
         </div>
 
         <aside class="sidebar">
