@@ -16,8 +16,11 @@
 
     <div class="header_second_div">
         <div class="search_container">
+        <form action="<?= BASE_URL ?>?controller=Blog&action=buscar" method="POST">
             <label class="search_label" for="buscar">Buscar</label>
-            <input class="search_input" type="text" placeholder="Busca">
+            <input class="search_input" type="text" name="q" placeholder="Busca">
+            <button type="submit" class="search_button">Buscar</button>
+        </form>
         </div>
         <div class="login_container">
             <input class="login_user" type="text" placeholder="Usuario">

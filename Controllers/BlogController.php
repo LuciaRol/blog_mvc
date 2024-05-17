@@ -6,6 +6,7 @@ use Services\EntradasComentariosService; // Importa el servicio de entradas
 use Models\Blog;
 
 class BlogController {
+    private EntradasComentariosService $entradasComentariosService;
 
     private Pages $pagina;
     private EntradasComentariosService $entradasService; 
@@ -27,7 +28,16 @@ class BlogController {
         $this->pagina->render("Blog/mostrarBlog", ['entradas' => $entradas]);
    
     }
+    public function buscar() {
+        $searchQuery = isset($_POST['q']) ? $_POST['q'] : '';
 
+        #$searchQuery = 'Introducción';
+        // Use $searchQuery to perform the search
+        $entradas = $this->entradasService->buscarEntradas($searchQuery);
+    
+        // Instanciar la clase Pages para renderizar la vista
+        $this->pagina->render("Blog/mostrarBlog", ['entradas' => $entradas]);
+    }
    
 }
 

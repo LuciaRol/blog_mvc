@@ -1,5 +1,7 @@
 -- Insertar usuarios
 
+USE blog;
+
 INSERT INTO usuarios (nombre, apellidos, email, username, contrasena, rol) VALUES
 ('Juan', 'Pérez', 'juan@example.com', 'juan', 'contraseña123', 'admin'),
 ('María', 'González', 'maria@example.com', 'maria', 'clave456', 'usur'), 

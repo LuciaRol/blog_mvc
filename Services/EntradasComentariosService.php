@@ -23,5 +23,8 @@
             // Llama al método findAll() del repositorio EntradasComentariosRepository
             return $this->repository->findAll(); // Cambiado entradasComentariosRepository a $repository
         }
+        public function buscarEntradas(string $query): ?array {
+            return $this->repository->buscarEntradas($query);
+        }
     }
 ?>

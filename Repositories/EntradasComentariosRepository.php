@@ -69,4 +69,38 @@
             $this->sql = null;
             return $result;
         }
+
+
+        public function buscarEntradas(string $query): ?array {
+            $query = '%' . $query . '%';
+            $entradaCommit = null;
+            try {
+                $this->sql = $this->conection->prepareSQL("SELECT   	
+                                                                entradas.titulo,
+                                                                entradas.descripcion,
+                                                                entradas.fecha,
+                                                                usuarios.nombre,
+                                                                usuarios.apellidos,
+                                                                usuarios.email,
+                                                                usuarios.username,	
+                                                                usuarios.rol,
+                                                                categorias.nombre as categoria
+                                                            FROM entradas 
+                                                            inner join usuarios
+                                                            on usuarios.id = entradas.usuario_id
+                                                            inner join categorias
+                                                            on categorias.id = entradas.categoria_id
+                                                            WHERE titulo LIKE :query OR descripcion LIKE :query");
+                $this->sql->bindValue(':query', $query, PDO::PARAM_STR);
+                $this->sql->execute();
+                $entradaCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->sql->closeCursor();
+                $entradaCommit = $entradaCommitData ?: null;
+                
+            } catch (PDOException $e) {
+                $entradaCommit = $e->getMessage();
+            }
+        
+            return $entradaCommit;
+        }
     }

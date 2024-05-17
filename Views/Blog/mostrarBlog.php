@@ -15,25 +15,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Blog</title>
 </head>
-
-<body>   
-    
-    
-
+<body>
     <main class="grid-container">
         <div class="content">
             <h2>Últimos artículos</h2>
+            <?php if (!empty($searchQuery)): ?>
+                <h3>Resultados de búsqueda para "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</h3>
+                <?php if (!empty($resultadosBusqueda)): ?>
+                    <ul>
+                        <?php foreach ($resultadosBusqueda as $entrada): ?>
+                            <li>
+                                <h3><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                <p><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                <?php else: ?>
+                    <p>No se encontraron resultados.</p>
+                <?php endif; ?>
+            <?php else: ?>
                 <ul>
                     <?php foreach ($entradas as $entrada): ?>
                         <li>
-                            <h3><?php echo $entrada['titulo']; ?></h3>
-                            <p><?php echo $entrada['descripcion']; ?></p>
-                            <!-- Agregar más detalles de la entrada según sea necesario -->
+                            <h3><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                            <p><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
                         </li>
                     <?php endforeach; ?>
                 </ul>
+            <?php endif; ?>
         </div>
-
 
         <aside class="sidebar">
             <h3 class="sidebar_title">¡Regístrate ahora!</h3>
@@ -46,7 +56,6 @@
             </div>
         </aside>
     </main>
-
 </body>
 
 </html>
