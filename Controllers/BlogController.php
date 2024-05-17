@@ -2,7 +2,8 @@
 namespace Controllers;
 
 use Lib\Pages;
-use Services\EntradasComentariosService; // Importa el servicio de entradas
+use Services\EntradasComentariosService; 
+use Services\UsuariosService; 
 use Models\Blog;
 
 class BlogController {
@@ -43,6 +44,35 @@ class BlogController {
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", ['entradas' => $entradas, 'searchQuery' => $searchQuery, 'noResults' => $noResults]);
     }
+
+    public function registroUsuario() {
+        // Verifica si se ha enviado el formulario de registro
+        if (isset($_POST['registro'])) {
+            // Obtiene los datos del formulario
+            $nombre = $_POST['nombre'];
+            $apellidos = $_POST['apellidos'];
+            $email = $_POST['email'];
+            $username = $_POST['username'];
+            $contrasena = $_POST['contrasena'];
+            $rol = 'usur'; // Todos los usuarios son usur por defecto
+
+            // Llama al servicio de usuarios para registrar al usuario
+            $usuariosService = new UsuariosService();
+
+            
+            $resultado = $usuariosService->register($nombre, $apellidos, $email, $username, $contrasena, $rol);
+            
+            // Ejecuta la función mostrarBlog()
+            $this->mostrarBlog();
+
+            // Sal del método registroUsuario()
+            return;
+        
+            }
+    }
+
+
+
    
 }
 

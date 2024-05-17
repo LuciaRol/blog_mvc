@@ -44,11 +44,15 @@
         <aside class="sidebar">
             <h3 class="sidebar_title">¡Regístrate ahora!</h3>
             <div class="sidebar_inputs">
-                <input type="text" class="sidebar_input" placeholder="Nombre">
-                <input type="text" class="sidebar_input" placeholder="Apellidos">
-                <input type="email" class="sidebar_input" placeholder="Email">
-                <input type="password" class="sidebar_input" placeholder="Contraseña">
-                <button type="submit" class="sidebar_btn">Registrarse</button>
+            <form action="<?= BASE_URL ?>?controller=Blog&action=registroUsuario" method="POST">
+                <input type="text" class="sidebar_input" placeholder="Nombre" name="nombre">
+                <input type="text" class="sidebar_input" placeholder="Apellidos" name="apellidos">
+                <input type="email" class="sidebar_input" placeholder="Email" name="email">
+                <input type="username" class="sidebar_input" placeholder="Username" name="username">
+                <input type="password" class="sidebar_input" placeholder="Contraseña" name="contrasena">
+                <button type="submit" class="sidebar_btn" name="registro">Registrarse</button>
+
+            </form>
             </div>
         </aside>
     </main>

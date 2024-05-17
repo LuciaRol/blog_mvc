@@ -10,22 +10,9 @@
         public function allUsers() :?array {
             return $this->userRepository->findAll();
         }
-        public function register($nombre,$apellidos,$email, $username, $contrasena, $rol):?string{
-            return $this->userRepository->registro($nombre,$apellidos,$email, $username, $contrasena, $rol);
-        }
-        public function getIdentity($email) {
-            return $this->userRepository->getIdentity($email);
-        }
-        public function getData($id) {
-            return $this->userRepository->getIdentityId($id);
-        }
-        public function removeUser($id):?string {
-            return $this->userRepository->removeUser($id);
-        }
-        public function update($id,$rol) :?string {
-            return  $this->userRepository->update($id,$rol);
-        }
-        public function addCommit($id,$date) :?string {
-            return $this->userRepository->addCommit($id,$date);
+       
+        public function register($nombre, $apellidos, $email, $username, $contrasena, $rol): ?string {
+            // Llama al método del repositorio para insertar el usuario en la base de datos
+            return $this->userRepository->registro($nombre, $apellidos, $email, $username, $contrasena, $rol);
         }
     }
