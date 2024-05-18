@@ -7,6 +7,7 @@ use Models\Validar;
 class Usuarios
 {
     public function __construct(
+        private string $id,
         private string $nombre,
         private string $apellidos,
         private string $email,
@@ -16,6 +17,16 @@ class Usuarios
     ) {
     }
 
+    public function getId(): string
+    {
+        return $this->id;
+    }
+
+    public function setId(string $id): self
+    {
+        $this->id = $id;
+        return $this;
+    }
     public function getNombre(): string
     {
         return $this->nombre;
@@ -87,6 +98,7 @@ class Usuarios
     public static function fromArray(array $data): Usuarios
     {
         return new Usuarios(
+            $data['id'] ?? '',
             $data['nombre'] ?? '',
             $data['apellidos'] ?? '',
             $data['email'] ?? '',

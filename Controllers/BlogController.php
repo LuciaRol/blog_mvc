@@ -229,20 +229,48 @@ class BlogController {
 
     
     public function mostrarEntradas($error=null) {
-        // Verifica si el usuario está autenticado usando la función sesion_usuario()
         if (!$this->sesion_usuario()) {
+            
+
             return;
         }
         
-            
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo']) && isset($_POST['descripcion']) && isset($_POST['categoria'])) {
+            // Obtener usuario ID de la sesión
+            // $usuario_id = $_SESSION['id'];
+            $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
+
+            $usuario_id = $usuario->getId();
+            // Obtener datos del formulario
+            $titulo = $_POST['titulo'];
+            $descripcion = $_POST['descripcion'];
+            $categoria_id = $_POST['categoria'];
+            $fecha = date('Y-m-d'); // Fecha actual
+    
+            // Insertar nueva entrada
+            $this->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
+        }
+    
         // Obtén las categorías utilizando el servicio de categorías
         $categorias = $this->categoriasService->obtenerCategorias();
-
+    
         // Pasar las categorías a la vista
         $data = ['categorias' => $categorias];
-
+    
         // Renderiza la vista de entradas pasando los datos obtenidos
         $this->pagina->render("Blog/mostrarEntradas", $data);
+    }
+    
+    private function insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha) {
+        // Llama al método del servicio para insertar la entrada
+        $resultado = $this->entradasService->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
+        if ($resultado) {
+            // Entrada insertada correctamente
+            // Redirige a alguna página de éxito o muestra un mensaje
+        } else {
+            // Error al insertar la entrada
+            // Maneja el error adecuadamente
+        }
     }
 
 

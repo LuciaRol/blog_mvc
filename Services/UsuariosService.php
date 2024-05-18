@@ -32,6 +32,8 @@
             return $this->userRepository->findByUsername($username);
         }
 
+        
+
         public function actualizarRol(string $username, string $nuevoRol): ?string {
             return $this->userRepository->actualizarRol($username, $nuevoRol);
         }

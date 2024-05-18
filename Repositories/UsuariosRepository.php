@@ -63,6 +63,7 @@
                 if ($usuarioData) {
                     // Crea un objeto Usuarios utilizando los datos recuperados
                     $usuario = new Usuarios(
+                        $usuarioData['id'],
                         $usuarioData['nombre'],
                         $usuarioData['apellidos'],
                         $usuarioData['email'],

@@ -39,38 +39,6 @@
         
             return $entradaCommit;
         }
-        public function addCommit(array $data):?string {
-            try{
-                $this->sql = $this->conexion->prepareSQL("INSERT INTO entradas(usuario_id,categoria_id,titulo,descripcion,fecha) VALUES (:usuario_id,:categoria_id,:titulo,:descripcion,:fecha);");
-                $this->sql->bindValue(":usuario_id",$data['usuario_id']);
-                $this->sql->bindValue(":categoria_id",$data['categoria_id']);
-                $this->sql->bindValue(":titulo",$data['titulo']);
-                $this->sql->bindValue(":descripcion",$data['descripcion']);
-                $this->sql->bindValue(":fecha",$data['fecha']);
-                $this->sql->execute();
-                $result = null;
-            }catch(PDOException $e){
-                $result = $e->getMessage();
-            }
-            $this->sql->closeCursor();
-            $this->sql = null;
-            return $result;
-        }
-        public function delete($id):?string {
-            try{
-                $this->sql = $this->conexion->prepareSQL("DELETE FROM entradas WHERE id = :id;");
-                $this->sql->bindValue(":id",$id);
-                $this->sql->execute();
-                $result = null;
-            }catch(PDOException $e){
-                $result = $e->getMessage();
-            }
-            $this->sql->closeCursor();
-            $this->sql = null;
-            return $result;
-        }
-
-
         public function buscarEntradas(string $query): ?array {
             $query = '%' . $query . '%';
             $entradaCommit = null;
@@ -103,4 +71,20 @@
         
             return $entradaCommit;
         }
+
+        public function insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha) {
+            try {
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO entradas (usuario_id, categoria_id, titulo, descripcion, fecha) VALUES (:usuario_id, :categoria_id, :titulo, :descripcion, :fecha)");
+                $this->sql->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->bindValue(':categoria_id', $categoria_id, PDO::PARAM_INT);
+                $this->sql->bindValue(':titulo', $titulo, PDO::PARAM_STR);
+                $this->sql->bindValue(':descripcion', $descripcion, PDO::PARAM_STR);
+                $this->sql->bindValue(':fecha', $fecha, PDO::PARAM_STR);
+                $this->sql->execute();
+                return true; // Éxito al insertar la entrada
+            } catch (PDOException $e) {
+                return false; // Error al insertar la entrada
+            }
+        }
+        
     }

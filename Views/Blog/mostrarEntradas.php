@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<form action="procesarEntrada.php" method="post">
+<form method="post" action="<?= BASE_URL ?>?controller=Blog&action=mostrarEntradas" method="POST">
     <label for="titulo">Título:</label><br>
     <input type="text" id="titulo" name="titulo"><br>
     
