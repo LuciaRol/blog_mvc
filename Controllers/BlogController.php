@@ -93,21 +93,25 @@ class BlogController {
         if ($user) {
             session_start();
             $_SESSION['username'] = $user->getUsername();
+            
         } else {
             $error = 'Usuario o contraseña incorrecta';
         }
     } 
+
+    // Aquí hay que empezar un new usuario
     // else {
     //     $error = 'Complete todos los campos';
     // } comentado debido al error que muestra sesion_usuario
 
     $this->mostrarBlog($error); // Llama a mostrarBlog con el posible mensaje de error del login
+    
 }
 
     public function logout() {
         session_start();
         session_destroy();
-        $this->mostrarBlog();
+        $this->mostrarBlog(); // vuelve al origen y cierra la sesion. No puede cerrar sesion estando en otras instancias dado que no debería tener acceso
     }
 
     public function sesion_usuario():bool {
@@ -126,14 +130,26 @@ class BlogController {
         return true; // Retorna true si el usuario está autenticado
     }
 
-    public function mostrarCategoria1($error=null) {
+    public function mostrarUsuario($error=null) {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()
         if (!$this->sesion_usuario()) {
+            return;
         }
     
-        // Renderiza la vista de la categoría
-        $this->pagina->render("Blog/mostrarUsuario");   
+        // Obtén los datos del usuario autenticado
+        $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
+        
+        // Obtén todas las propiedades del usuario
+        $nombre = $usuario->getNombre();
+        $apellidos = $usuario->getApellidos();
+        $email = $usuario->getEmail();
+        $username = $usuario->getUsername();
+        $rol = $usuario->getRol();
+    
+        // Renderiza la vista de usuario pasando las propiedades del usuario
+        $this->pagina->render("Blog/mostrarUsuario", compact('nombre', 'apellidos', 'email', 'username', 'rol'));
     }
+    
     public function mostrarCategoria2($error=null) {
 
          // Verifica si el usuario está autenticado usando la función sesion_usuario()

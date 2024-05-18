@@ -28,4 +28,8 @@
             }
         }
 
+        public function obtenerUsuarioPorNombreDeUsuario(string $username): ?Usuarios {
+            return $this->userRepository->findByUsername($username);
+        }
+
     }
