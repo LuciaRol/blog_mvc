@@ -78,4 +78,17 @@
                 return null; // Devuelve null en caso de error
             }
         }
+
+        public function actualizarRol(string $username, string $nuevoRol): ?string {
+            try {
+                $sql = $this->conexion->prepareSQL("UPDATE usuarios SET rol = :rol WHERE username = :username;");
+                $sql->bindValue(":username", $username, PDO::PARAM_STR);
+                $sql->bindValue(":rol", $nuevoRol, PDO::PARAM_STR);
+                $sql->execute();
+                $sql->closeCursor();
+                return null;
+            } catch (PDOException $e) {
+                return $e->getMessage();
+            }
+        }
     }

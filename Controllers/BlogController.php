@@ -169,5 +169,24 @@ class BlogController {
             $this->mostrarBlog();
         }
     }
+
+    public function actualizarRol() {
+        $username = $_POST['username'] ?? '';
+        $nuevoRol = $_POST['rol'] ?? '';
+
+        if ($username && $nuevoRol) {
+            $resultado = $this->usuariosService->actualizarRol($username, $nuevoRol);
+            if ($resultado === null) {
+                $this->mostrarUsuario(); // Redirige a mostrar usuario si la actualización es exitosa
+            } else {
+                // Manejo de error si ocurre algún problema al actualizar el rol
+                $this->mostrarUsuario($resultado);
+            }
+        } else {
+            // Manejo de error si los datos del formulario no son válidos
+            $this->mostrarUsuario("Datos del formulario no válidos");
+        }
+    }
+
 }
 
