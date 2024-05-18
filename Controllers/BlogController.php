@@ -196,18 +196,36 @@ class BlogController {
     }
 
     public function registroCategoria() {
-    
-        // Después de registrar el usuario, guarda la nueva categoría si está presente en el formulario
-        if (isset($_POST['nueva_categoria'])) {
-            $nombreCategoria = $_POST['nueva_categoria'];
-            $this->categoriasService->guardarCategoria($nombreCategoria);
-            $this->mostrarCategorias();
-
+        $mensaje = ''; // Inicializamos la variable de mensaje
+        
+        // Verifica si el usuario está autenticado
+        if ($this->sesion_usuario()) {
+            // Obtén el usuario actual
+            $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
+            
+            // Verifica si el usuario tiene permisos de administrador
+            if ($usuario->getRol() === 'admin') {
+                // Después de verificar al usuario como administrador, guarda la nueva categoría si está presente en el formulario
+                if (isset($_POST['nueva_categoria'])) {
+                    $nombreCategoria = $_POST['nueva_categoria'];
+                    $this->categoriasService->guardarCategoria($nombreCategoria);
+                }
+            } else {
+                // Si el usuario no es administrador, asigna un mensaje indicando que no tiene permisos suficientes
+                $mensaje = "No tienes permisos de administrador para registrar nuevas categorías.";
+            }
         }
+        
+        // Obtener las categorías para mostrar en la vista
+        $categorias = $this->categoriasService->obtenerCategorias();
+        
+        // Pasar las categorías y el mensaje a la vista
+        $data = ['categorias' => $categorias, 'mensaje' => $mensaje];
+        
+        // Renderizar la vista
+        $this->pagina->render("Blog/mostrarCategorias", $data);
+        
     }
-    
-
-
 
 }
 

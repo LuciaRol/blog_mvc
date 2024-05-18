@@ -11,11 +11,15 @@
 
 <ul>
     <?php foreach ($categorias as $categoria): ?>
-        <li><?php echo $categoria['nombre']; ?></li>
+        <li><?= $categoria['nombre']; ?></li>
     <?php endforeach; ?>
 </ul>
 
 <h3>Añadir Nueva Categoría</h3>
+
+<?php if (!empty($mensaje)): ?>
+    <p><?= $mensaje ?></p>
+<?php endif; ?>
 
 <form method="post" action="<?= BASE_URL ?>?controller=Blog&action=registroCategoria" method="POST">
     <input type="text" name="nueva_categoria" placeholder="Nombre de la nueva categoría">
