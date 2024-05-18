@@ -29,21 +29,18 @@ class BlogController {
 
     }
 
-    public function mostrarBlog($error=null) {
-            
+    public function mostrarBlog($error=null, $usuarioRecordado=null) {
         // Obtener todas las entradas desde el servicio
         $entradas = $this->entradasService->findAll();
-
+    
         // Miramos si no hay entradas
         $noResults = empty($entradas);
-
+    
         $data = ['entradas' => $entradas, 'noResults' => $noResults];
-
+    
         if ($error) {
             $data['loginError'] = $error;
         }
-    
-
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", $data);   
     }
@@ -61,7 +58,7 @@ class BlogController {
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", ['entradas' => $entradas, 'searchQuery' => $searchQuery, 'noResults' => $noResults]);
     }
-
+    // USUARIO
     public function registroUsuario() {
         // Verifica si se ha enviado el formulario de registro
         if (isset($_POST['registro'])) {
@@ -90,22 +87,31 @@ class BlogController {
     public function login() {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
-        $error = ''; //Creamos esta variable para que si todo va bien, no de error al mostrarBlog
-
-    if ($username && $password) {
-        $user = $this->usuariosService->verificaCredenciales($username, $password);
-        if ($user) {
-            session_start();
-            $_SESSION['username'] = $user->getUsername();
-            
-        } else {
-            $error = 'Usuario o contraseña incorrecta';
-        }
-    } 
-
-    $this->mostrarBlog($error); // Llama a mostrarBlog con el posible mensaje de error del login
+        $error = ''; // Creamos esta variable para que si todo va bien, no de error al mostrarBlog
     
-}
+        if ($username && $password) {
+            $user = $this->usuariosService->verificaCredenciales($username, $password);
+            if ($user) {
+                session_start();
+                $_SESSION['username'] = $user->getUsername();
+                
+                // Si se marca la casilla de "recordar usuario", establecer la cookie
+                
+                // Establecer el nombre de usuario como valor de la cookie
+                setcookie("usuario_recordado", $user->getUsername(), time() + (30 * 24 * 60 * 60), "/");
+                
+                
+            } else {
+                $error = 'Usuario o contraseña incorrecta';
+            }
+        } 
+    
+        // Verificar si la cookie "usuario_recordado" existe y establecer la variable $usuarioRecordado
+        $usuarioRecordado = isset($_COOKIE['usuario_recordado']) ? $_COOKIE['usuario_recordado'] : null;
+    
+        // Llama a mostrarBlog con el posible mensaje de error del login y la variable $usuarioRecordado
+        $this->mostrarBlog($error, $usuarioRecordado);
+    }
 
     public function logout() {
         session_start();
@@ -149,19 +155,7 @@ class BlogController {
         $this->pagina->render("Blog/mostrarUsuario", compact('nombre', 'apellidos', 'email', 'username', 'rol'));
     }
     
-    public function mostrarCategorias($error=null) {
-        // Verifica si el usuario está autenticado usando la función sesion_usuario()
-        if (!$this->sesion_usuario()) {
-            return;
-        }
-    
-        // Obtén los datos de las categorías usando el servicio de categorías
-        $categorias = $this->categoriasService->obtenerCategorias();
-        
-        // Renderiza la vista de categorías pasando los datos obtenidos
-        $this->pagina->render("Blog/mostrarCategorias", ['categorias' => $categorias]);   
-    }
-
+   
     public function mostrarblogsesion($error=null) {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()
         if ($this->sesion_usuario()) {
@@ -190,7 +184,19 @@ class BlogController {
             $this->mostrarUsuario("Datos del formulario no válidos");
         }
     }
-
+    // CATEGORIAS
+    public function mostrarCategorias($error=null) {
+        // Verifica si el usuario está autenticado usando la función sesion_usuario()
+        if (!$this->sesion_usuario()) {
+            return;
+        }
+    
+        // Obtén los datos de las categorías usando el servicio de categorías
+        $categorias = $this->categoriasService->obtenerCategorias();
+        
+        // Renderiza la vista de categorías pasando los datos obtenidos
+        $this->pagina->render("Blog/mostrarCategorias", ['categorias' => $categorias]);   
+    }
     public function registroCategoria() {
         $mensaje = ''; // Inicializamos la variable de mensaje
         
@@ -223,11 +229,9 @@ class BlogController {
         
     }
 
-    
+    // Entradas
     public function mostrarEntradas($error=null) {
         if (!$this->sesion_usuario()) {
-            
-
             return;
         }
         

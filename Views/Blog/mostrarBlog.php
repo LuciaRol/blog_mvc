@@ -5,6 +5,7 @@
     // Crear una instancia del controlador
     $BlogController = new BlogController();
   
+    
 ?>
 
 <!DOCTYPE html>
