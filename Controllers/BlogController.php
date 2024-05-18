@@ -5,8 +5,7 @@ use Lib\Pages;
 use Services\EntradasComentariosService; 
 use Services\UsuariosService; 
 use Services\CategoriasService;
-use Models\Blog;
-use Models\Usuarios;
+
 
 class BlogController {
 

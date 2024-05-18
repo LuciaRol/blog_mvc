@@ -11,23 +11,7 @@
         function __construct(){
             $this->conexion = new DataBase();
         }
-        public function findAll():? array {
-            $this->conexion->querySQL("SELECT * FROM usuarios;");
-            return $this->extractAll();
-        }
-        public function extractAll():?array {
-            $usuarios = [];
-            try{
-                $this->conexion->querySQL("SELECT * FROM usuarios");
-                $usuariosData = $this->conexion->allRegister();
-                foreach ($usuariosData as $usuarioData){
-                    $usuarios[]=Usuarios::fromArray($usuarioData);
-                }
-            }catch(PDOException){
-                $usuarios=null;
-            }
-            return $usuarios;
-        }
+        
         public function registro($nombre, $apellidos, $email, $username, $contrasena, $rol): ?string {
             try {
                         // Cifra la contraseña
