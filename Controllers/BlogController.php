@@ -111,12 +111,15 @@ class BlogController {
 
 
     public function mostrarCategoria1($error=null) {
-            
-        
-        echo "<h2>Esta es la CATEGORÍA 1</h2>";
 
         
         $this->pagina->render("Blog/mostrarCategoria1");   
+    }
+
+    public function mostrarCategoria2($error=null) {
+
+        
+        $this->pagina->render("Blog/mostrarCategoria2");   
     }
 }
 

@@ -7,7 +7,7 @@
 </head>
 <body>
 
-<h2>ESTA ES LA CATEGORÍA 1</h2>
+<h2>ESTA ES LA CATEGORÍA 2</h2>
 <section class="section">
     <div class="row row-cols-1 row-cols-md-2 g-4">
     <div class="col">
