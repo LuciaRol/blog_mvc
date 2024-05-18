@@ -96,9 +96,10 @@ class BlogController {
         } else {
             $error = 'Usuario o contraseña incorrecta';
         }
-    } else {
-        $error = 'Complete todos los campos';
-    }
+    } 
+    // else {
+    //     $error = 'Complete todos los campos';
+    // } comentado debido al error que muestra sesion_usuario
 
     $this->mostrarBlog($error); // Llama a mostrarBlog con el posible mensaje de error del login
 }
@@ -109,17 +110,48 @@ class BlogController {
         $this->mostrarBlog();
     }
 
-
-    public function mostrarCategoria1($error=null) {
-
-        
-        $this->pagina->render("Blog/mostrarCategoria1");   
+    public function sesion_usuario():bool {
+        // Verifica si hay una sesión iniciada
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+    
+        // Verifica si el usuario está autenticado
+        if (!isset($_SESSION['username'])) {
+            // Si el usuario no está autenticado, redirige al método de login
+            $this->login();
+            return false;
+        }
+    
+        return true; // Retorna true si el usuario está autenticado
     }
 
+    public function mostrarCategoria1($error=null) {
+        // Verifica si el usuario está autenticado usando la función sesion_usuario()
+        if (!$this->sesion_usuario()) {
+        }
+    
+        // Renderiza la vista de la categoría
+        $this->pagina->render("Blog/mostrarUsuario");   
+    }
     public function mostrarCategoria2($error=null) {
 
+         // Verifica si el usuario está autenticado usando la función sesion_usuario()
+         if (!$this->sesion_usuario()) {
+            
+         }
+     
+         // Renderiza la vista de la categoría
         
         $this->pagina->render("Blog/mostrarCategoria2");   
+    }
+
+    public function mostrarblogsesion($error=null) {
+        // Verifica si el usuario está autenticado usando la función sesion_usuario()
+        if ($this->sesion_usuario()) {
+            // Si el usuario está autenticado, llama a la función mostrarBlog()
+            $this->mostrarBlog();
+        }
     }
 }
 
