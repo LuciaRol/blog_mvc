@@ -12,4 +12,7 @@
             return $this->categoriasRepository->findAll();
         }
         
+        public function guardarCategoria(string $nombreCategoria): bool {
+            return $this->categoriasRepository->guardarCategoria($nombreCategoria);
+        }
     }

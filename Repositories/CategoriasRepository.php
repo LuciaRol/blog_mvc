@@ -28,6 +28,16 @@
             return $categoriaCommit;
         }
         
+        public function guardarCategoria(string $nombreCategoria): bool {
+            try {
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO categorias (nombre) VALUES (:nombre)");
+                $this->sql->bindParam(':nombre', $nombreCategoria, PDO::PARAM_STR);
+                $this->sql->execute();
+                return true;
+            } catch (PDOException $e) {
+                return false;
+            }
+        }
 
         
     }

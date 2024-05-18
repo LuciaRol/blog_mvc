@@ -195,5 +195,19 @@ class BlogController {
         }
     }
 
+    public function registroCategoria() {
+    
+        // Después de registrar el usuario, guarda la nueva categoría si está presente en el formulario
+        if (isset($_POST['nueva_categoria'])) {
+            $nombreCategoria = $_POST['nueva_categoria'];
+            $this->categoriasService->guardarCategoria($nombreCategoria);
+            $this->mostrarCategorias();
+
+        }
+    }
+    
+
+
+
 }
 
