@@ -28,7 +28,6 @@ class BlogController {
 
         $this->categoriasService = new CategoriasService();
 
-
     }
 
     public function mostrarBlog($error=null) {
@@ -104,11 +103,6 @@ class BlogController {
             $error = 'Usuario o contraseña incorrecta';
         }
     } 
-
-    // Aquí hay que empezar un new usuario
-    // else {
-    //     $error = 'Complete todos los campos';
-    // } comentado debido al error que muestra sesion_usuario
 
     $this->mostrarBlog($error); // Llama a mostrarBlog con el posible mensaje de error del login
     
