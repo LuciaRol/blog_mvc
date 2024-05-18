@@ -1,6 +1,7 @@
 <?php
     namespace Services;
     use Repositories\UsuariosRepository;
+    use Models\Usuarios;
     class UsuariosService{
         // Creando variable con
         private UsuariosRepository $userRepository;
@@ -15,4 +16,16 @@
             // Llama al método del repositorio para insertar el usuario en la base de datos
             return $this->userRepository->registro($nombre, $apellidos, $email, $username, $contrasena, $rol);
         }
+
+        public function verificaCredenciales(string $username, string $password): ?Usuarios {
+            $user = $this->userRepository->findByUsername($username);
+            
+            // Verifica que el usuario exista y que la contraseña coincida
+            if ($user && $user->getContrasena() === $password) {
+                return $user; // Devuelve el objeto Usuarios si las credenciales son correctas
+            } else {
+                return null; // Devuelve null si las credenciales son incorrectas
+            }
+        }
+
     }

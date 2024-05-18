@@ -12,7 +12,7 @@ class Usuarios
         private string $email,
         private string $username,
         private string $contrasena,
-        private string $rol = "user"
+        private string $rol
     ) {
     }
 
@@ -95,76 +95,5 @@ class Usuarios
             $data['rol'] ?? 'usur' // Si el rol no está presente, se establecerá como 'usur' por defecto
         );
     }
-    public static function validation(array $data, array &$errores, array $arrayUsuarios, array $arrayEmail): array
-    {
-        $username = $data['username'];
-        $password1 = $data['password'];
-        $password2 = $data['password2'];
-        $email = $data['email'];
-        $nombre = $data['nombre'];
-        $apellidos = $data['apellidos'];
-        
-        // USERNAME
-        
-        if (empty($username)) {
-            $errores['username'] = "Usuario es obligatorio";
-        } elseif (Validar::validar_array($username, $arrayUsuarios)) {
-            $errores['username'] = "Usuario ya registrado";
-        } elseif (strlen($username) < 4) {
-            $errores['username'] = "Usuario debe tener más de 4 caracteres";
-        } elseif (!Validar::son_letras($username)) {
-            $errores['username'] = "Usuario contiene caracteres no permitidos";
-        }
-
-        // PASSWORD
-        if (empty($password1)) {
-            $errores['password'] = "Contraseña es obligatoria";
-        } elseif ($password1 != $password2) {
-            $errores['password'] = "Las contraseñas no coinciden";
-            $errores['password2'] = "Las contraseñas no coinciden";
-        } elseif (strlen($password1) <= 8) {
-            $errores['password'] = "La contraseña debe tener más de 8 caracteres";
-        }
-        
-        // EMAIL
-        
-        if (empty($email)) {
-            $errores['email'] = "Email es obligatorio";
-        } elseif (Validar::validar_array($email, $arrayEmail)) {
-            $errores['email'] = "Email ya registrado";
-        } elseif (!Validar::esEmail($email)) {
-            $errores['email'] = "Email tiene un formato inválido";
-        }
-
-        # NOMBRE
-        
-        if (empty($nombre)) {
-            $errores['nombre'] = "Nombre es obligatorio";
-        } elseif (!Validar::son_letras($nombre)) {
-            $errores['nombre'] = "Nombre contiene caracteres no permitidos";
-        }
-
-        #  APELLIDOS
-
-        if (empty($apellidos)) {
-            $errores['apellidos'] = "Apellidos son obligatorios";
-        } elseif (!Validar::son_letras($apellidos)) {
-            $errores['apellidos'] = "Apellidos contienen caracteres no permitidos";
-        }
-
-        return $errores;
-    }
-    public static function validationLogin(array $data,array &$errores) : array {
-        $pass1 = $data['password'];
-        $email = $data['email'];
-        if (empty($pass1)) {
-            $errores['password'] = "Contraseña obligatoria";
-        }
-        if (empty($email)) {
-            $errores['email'] = "Email obligatorio";
-        } elseif (!Validar::esEmail($email)) {
-            $errores['email'] = "Email tiene caracteres extraños";
-        }
-        return $errores;
-    }
+    
 }

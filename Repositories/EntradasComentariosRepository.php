@@ -4,15 +4,15 @@
     use PDOException;
     use PDO;
     class entradasComentariosRepository{
-        private DataBase $conection;
+        private DataBase $conexion;
         private mixed $sql;
         function __construct(){
-            $this->conection = new DataBase();
+            $this->conexion = new DataBase();
         }
         public function findAll() {
             $entradaCommit = null;
             try {
-                $this->sql = $this->conection->prepareSQL("SELECT   	
+                $this->sql = $this->conexion->prepareSQL("SELECT   	
                                                                 entradas.titulo,
                                                                 entradas.descripcion,
                                                                 entradas.fecha,
@@ -41,7 +41,7 @@
         }
         public function addCommit(array $data):?string {
             try{
-                $this->sql = $this->conection->prepareSQL("INSERT INTO entradas(usuario_id,categoria_id,titulo,descripcion,fecha) VALUES (:usuario_id,:categoria_id,:titulo,:descripcion,:fecha);");
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO entradas(usuario_id,categoria_id,titulo,descripcion,fecha) VALUES (:usuario_id,:categoria_id,:titulo,:descripcion,:fecha);");
                 $this->sql->bindValue(":usuario_id",$data['usuario_id']);
                 $this->sql->bindValue(":categoria_id",$data['categoria_id']);
                 $this->sql->bindValue(":titulo",$data['titulo']);
@@ -58,7 +58,7 @@
         }
         public function delete($id):?string {
             try{
-                $this->sql = $this->conection->prepareSQL("DELETE FROM entradas WHERE id = :id;");
+                $this->sql = $this->conexion->prepareSQL("DELETE FROM entradas WHERE id = :id;");
                 $this->sql->bindValue(":id",$id);
                 $this->sql->execute();
                 $result = null;
@@ -75,7 +75,7 @@
             $query = '%' . $query . '%';
             $entradaCommit = null;
             try {
-                $this->sql = $this->conection->prepareSQL("SELECT   	
+                $this->sql = $this->conexion->prepareSQL("SELECT   	
                                                                 entradas.titulo,
                                                                 entradas.descripcion,
                                                                 entradas.fecha,

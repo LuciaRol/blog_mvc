@@ -5,11 +5,14 @@ use Lib\Pages;
 use Services\EntradasComentariosService; 
 use Services\UsuariosService; 
 use Models\Blog;
+use Models\Usuarios;
 
 class BlogController {
 
-    private Pages $pagina;
+    private Pages $pagina;  
     private EntradasComentariosService $entradasService; 
+    private UsuariosService $usuariosService;
+
 
     public function __construct()
     {
@@ -17,9 +20,12 @@ class BlogController {
         $this->pagina = new Pages();
         // Crea una instancia del servicio de entradas
         $this->entradasService = new EntradasComentariosService();
+
+        $this->usuariosService = new UsuariosService();
+
     }
 
-    public function mostrarBlog() {
+    public function mostrarBlog($error=null) {
             
         // Obtener todas las entradas desde el servicio
         $entradas = $this->entradasService->findAll();
@@ -27,9 +33,15 @@ class BlogController {
         // Miramos si no hay entradas
         $noResults = empty($entradas);
 
+        $data = ['entradas' => $entradas, 'noResults' => $noResults];
+
+        if ($error) {
+            $data['loginError'] = $error;
+        }
+    
+
         // Instanciar la clase Pages para renderizar la vista
-        $this->pagina->render("Blog/mostrarBlog", ['entradas' => $entradas, 'noResults' => $noResults]);
-   
+        $this->pagina->render("Blog/mostrarBlog", $data);   
     }
     public function buscar() {
         $searchQuery = isset($_POST['q']) ? $_POST['q'] : '';
@@ -70,9 +82,29 @@ class BlogController {
         
             }
     }
+    public function login() {
+        $username = $_POST['username'] ?? '';
+        $password = $_POST['password'] ?? '';
 
+    if ($username && $password) {
+        $user = $this->usuariosService->verificaCredenciales($username, $password);
+        if ($user) {
+            session_start();
+            $_SESSION['username'] = $user->getUsername();
+        } else {
+            $error = 'Usuario o contraseña incorrecta';
+        }
+    } else {
+        $error = 'Complete todos los campos';
+    }
 
+    $this->mostrarBlog($error); // Llama a mostrarBlog con el posible mensaje de error
+}
 
-   
+    public function logout() {
+        session_start();
+        session_destroy();
+        $this->mostrarBlog();
+    }
 }
 

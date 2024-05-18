@@ -5,27 +5,27 @@
     use PDOException;
     use PDO;
     class categoriasRepository{
-        private DataBase $conection;
+        private DataBase $conexion;
         private mixed $sql;
         function __construct(){
-            $this->conection = new DataBase();
+            $this->conexion = new DataBase();
         }
         public function findAll():? array {
-            $this->conection->querySQL("SELECT * FROM categorias;");
+            $this->conexion->querySQL("SELECT * FROM categorias;");
             
             return $this->extractAll();
         }
         public function countCategorias(): ?int {
-            $this->conection->querySQL("SELECT COUNT(*) as total FROM categorias;");
+            $this->conexion->querySQL("SELECT COUNT(*) as total FROM categorias;");
         
-            $result = $this->conection->register();
+            $result = $this->conexion->register();
             
             return $result['total'];
         }
         public function extractAll():?array {
             $contactos = [];
             try{
-                $contactosData = $this->conection->allRegister();
+                $contactosData = $this->conexion->allRegister();
                 foreach ($contactosData as $contactoData){
                     $contactos[]=Blog::fromArray($contactoData);
                 }
@@ -36,7 +36,7 @@
         }
         public function addCategoria(array $data):?string {
             try{
-                $this->sql = $this->conection->prepareSQL("INSERT INTO categorias(nombre) VALUES (:nombre);");
+                $this->sql = $this->conexion->prepareSQL("INSERT INTO categorias(nombre) VALUES (:nombre);");
                 $this->sql->bindValue(":nombre",$data['nombre']);
                 $this->sql->execute();
                 $result = null;
@@ -49,7 +49,7 @@
         }
         public function delete($id):?string {
             try{
-                $this->sql = $this->conection->prepareSQL("DELETE FROM categorias WHERE id = :id;");
+                $this->sql = $this->conexion->prepareSQL("DELETE FROM categorias WHERE id = :id;");
                 $this->sql->bindValue(":id",$id);
                 $this->sql->execute();
                 $result = null;
@@ -63,7 +63,7 @@
         public function getData($id){
             $ruta = null;
             try {
-                $this->sql = $this->conection->prepareSQL("SELECT * FROM categorias WHERE id = :id");
+                $this->sql = $this->conexion->prepareSQL("SELECT * FROM categorias WHERE id = :id");
                 $this->sql->bindValue(":id", $id);
                 $this->sql->execute();
                 $rutaData = $this->sql->fetch(PDO::FETCH_ASSOC);
@@ -79,7 +79,7 @@
         public function edit($data) {
             $result = "";
             try{
-                $this->sql = $this->conection->prepareSQL("UPDATE categorias SET nombre=:nombre WHERE id = :id;");
+                $this->sql = $this->conexion->prepareSQL("UPDATE categorias SET nombre=:nombre WHERE id = :id;");
                 $this->sql->bindValue(":id",$data['editar']);
                 $this->sql->bindValue(":nombre",$data['nombre']);
                 $this->sql->execute();
@@ -94,9 +94,9 @@
         public function search($opt,$search) :? array {
             $result =[];
             $resultados =[];
-                $this->conection->querySQL("SELECT * FROM categorias;");
+                $this->conexion->querySQL("SELECT * FROM categorias;");
                 
-                $result = $this->conection->allRegister();
+                $result = $this->conexion->allRegister();
                 $resultadosData = array_filter($result, function ($element) use ($opt,$search) {
                     $temporal = str_contains(strtolower($element[$opt]), strtolower($search));
                     return $temporal;

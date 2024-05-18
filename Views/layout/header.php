@@ -27,11 +27,28 @@
         </div>
         
 
+        <?php session_start(); ?>
+
         <div class="login_container">
-            <input class="login_user" type="text" placeholder="Usuario">
-            <input class="login_pass" type="text" placeholder="Contraseña">
-            <button class="login_btn" for="login">Iniciar sesión</button>
+            <?php if (isset($_SESSION['username'])): ?>
+                <p>Hola, <?= htmlspecialchars($_SESSION['username']); ?></p>
+                <form action="<?= BASE_URL ?>?controller=Blog&action=logout" method="POST">
+                    <button type="submit" class="logout_button">Cerrar sesión</button>
+                </form>
+            <?php else: ?>
+                <form action="<?= BASE_URL ?>?controller=Blog&action=login" method="POST">
+                    <input class="login_user" type="text" name="username" placeholder="Usuario" required>
+                    <input class="login_pass" type="password" name="password" placeholder="Contraseña" required>
+                    <button class="login_btn" type="submit">Iniciar sesión</button>
+                    <?php if (isset($loginError)): ?>
+                        <p><?= htmlspecialchars($loginError); ?></p>
+                    <?php endif; ?>
+                </form>
+            <?php endif; ?>
         </div>
     </div>
 </header>
+
+
+
 
