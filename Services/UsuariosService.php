@@ -21,7 +21,7 @@
             $user = $this->userRepository->findByUsername($username);
             
             // Verifica que el usuario exista y que la contraseña coincida
-            if ($user && $user->getContrasena() === $password) {
+            if ($user && password_verify($password, $user->getContrasena())) {
                 return $user; // Devuelve el objeto Usuarios si las credenciales son correctas
             } else {
                 return null; // Devuelve null si las credenciales son incorrectas
