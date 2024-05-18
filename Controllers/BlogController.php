@@ -227,5 +227,24 @@ class BlogController {
         
     }
 
+    
+    public function mostrarEntradas($error=null) {
+        // Verifica si el usuario está autenticado usando la función sesion_usuario()
+        if (!$this->sesion_usuario()) {
+            return;
+        }
+        
+            
+        // Obtén las categorías utilizando el servicio de categorías
+        $categorias = $this->categoriasService->obtenerCategorias();
+
+        // Pasar las categorías a la vista
+        $data = ['categorias' => $categorias];
+
+        // Renderiza la vista de entradas pasando los datos obtenidos
+        $this->pagina->render("Blog/mostrarEntradas", $data);
+    }
+
+
 }
 
