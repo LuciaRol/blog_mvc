@@ -1,187 +1,173 @@
 *{
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
 :root {
-	--primary: #02162b;
-	--primary-light: #072d56;
-	--secondary: #40e0d0;
-	--contrast: #d3acfa;
-	--text: #000; 
-	--text-title: #fff;
-	--font: Arial, Helvetica, sans-serif;
+    --primary: #02162b;
+    --primary-light: #072d56;
+    --secondary: #40e0d0;
+    --contrast: #d3acfa;
+    --text: #000; 
+    --text-title: #fff;
+    --font: Arial, Helvetica, sans-serif;
 }
 
 body{
-	font-family: var(--font);
+    font-family: var(--font) !important;
 }
-	
+    
 /* HEADER */
 header{
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	box-shadow: 0px 8px 16px -10px rgba(0,0,0,0.75);
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    box-shadow: 0px 8px 16px -10px rgba(0,0,0,0.75);
 }
 
 /* HEADER - PRIMER DIV */
 header .header_first_div{
-	display: flex;
-	flex-direction: row;
-	padding: 1rem;
-	align-items: center;
-	justify-content: space-between;
-	background-color: var(--primary);
-	color: var(--text-title);
+    display: flex;
+    flex-direction: row;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary) !important;
+    color: var(--text-title) !important;
 }
 
 header .header_principal{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	gap: 1.2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.2rem;
 }
 
-
 header .principal_logo{
-	width: 60px;
+    width: 60px;
 }
 
 header .nav_container{
-	display: flex;
-	gap: 1.2rem;
-	
+    display: flex;
+    gap: 1.2rem;
 }
 
 header .nav_link{
-	display: flex;
-	color: var(--text-title);
-	text-decoration: none;
-	cursor: pointer;
-	
+    display: flex;
+    color: var(--text-title) !important;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 /* HEADER - SEGUNDO DIV */
-
 header .header_second_div{
-	display: flex;
-	padding: 1rem;
-	align-items: center;
-	justify-content: space-between;
-	background-color: var(--primary-light);
-	color: var(--text-title);
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    background-color: var(--primary-light) !important;
+    color: var(--text-title) !important;
 }
 
 header .search_container, header .login_container{
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	gap: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
 }
 
 header .search_container input, header .login_container input{
-	padding: 0.3rem;
-	border-radius: 2px;
+    padding: 0.3rem !important;
+    border-radius: 2px !important;
 }
 
 header .search_container input:focus, header .login_container input:focus{
-	outline: 2px solid var(--secondary);
-	border-radius: 2px;
+    outline: 2px solid var(--secondary) !important;
+    border-radius: 2px !important;
 }
 
 header .login_btn{
-	padding: 0.3rem;
-	background-color: var(--contrast);
-	border-radius: 2px;
-	cursor:pointer;
+    padding: 0.3rem !important;
+    background-color: var(--contrast) !important;
+    border-radius: 2px !important;
+    cursor: pointer !important;
 }
 
 header .login_btn:focus{
-	outline: 2px solid var(--secondary);
-	border-radius: 2px;
+    outline: 2px solid var(--secondary) !important;
+    border-radius: 2px !important;
 }
 
 header .login_btn:hover{
-	background-color: rgb(63, 29, 96);
-	color: var(--text-title);
+    background-color: rgb(63, 29, 96) !important;
+    color: var(--text-title) !important;
 }
 
 /* MAIN */
-
 .grid-container {
-	height: 100vh;
-	display: grid;
-	grid-template-columns: 4fr 1fr; 
-	grid-gap: 20px; 
-  }
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 4fr 1fr; 
+    grid-gap: 20px; 
+}
   
 .content {
-	padding: 20px;
-	background-color: lavender;
-	margin-left: 15px;
+    padding: 20px !important;
+    background-color: lavender !important;
+    margin-left: 15px !important;
 }
   
 /* BARRA LATERAL */
 .sidebar {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	padding: 20px;
-	margin-right: 15px;
-	background-color: lavender;
-	border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px !important;
+    margin-right: 15px !important;
+    background-color: lavender !important;
+    border-radius: 5px !important;
 }
 
 .sidebar h3{
-	text-align: center;
-	padding: 1rem;
+    text-align: center !important;
+    padding: 1rem !important;
 }
 
 .sidebar .sidebar_inputs{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	justify-content: center;
-	gap: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem !important;
 }
 
 .sidebar .sidebar_input{
-	border: 1px solid gray;
-	padding: 0.3rem;
-	border-radius: 2px;
+    border: 1px solid gray !important;
+    padding: 0.3rem !important;
+    border-radius: 2px !important;
 }
 
 .sidebar .sidebar_input:focus{
-	outline: 3px solid var(--secondary);
-	border-radius: 2px;
+    outline: 3px solid var(--secondary) !important;
+    border-radius: 2px !important;
 }
 
 .sidebar .sidebar_btn{
-	padding: 0.3rem;
-	background-color: var(--contrast);
-	border-radius: 2px;
-	border: 1px solid rebeccapurple;
-	cursor:pointer;
+    padding: 0.3rem !important;
+    background-color: var(--contrast) !important;
+    border-radius: 2px !important;
+    border: 1px solid rebeccapurple !important;
+    cursor: pointer !important;
 }
 
 .sidebar .sidebar_btn:focus{
-	outline: 2px solid var(--secondary);
-	border-radius: 2px;
+    outline: 2px solid var(--secondary) !important;
+    border-radius: 2px !important;
 }
 
 .sidebar .sidebar_btn:hover{
-	background-color: rgb(63, 29, 96);
-	border: 1px solid gainsboro;
-	color: var(--text-title);
+    background-color: rgb(63, 29, 96) !important;
+    border: 1px solid gainsboro !important;
+    color: var(--text-title) !important;
 }
-
-
-
-
-  
-
-
-
-

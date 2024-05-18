@@ -43,6 +43,7 @@ class BlogController {
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", $data);   
     }
+
     public function buscar() {
         $searchQuery = isset($_POST['q']) ? $_POST['q'] : '';
 
@@ -106,6 +107,16 @@ class BlogController {
         session_start();
         session_destroy();
         $this->mostrarBlog();
+    }
+
+
+    public function mostrarCategoria1($error=null) {
+            
+        
+        echo "<h2>Esta es la CATEGORÍA 1</h2>";
+
+        
+        $this->pagina->render("Blog/mostrarCategoria1");   
     }
 }
 
