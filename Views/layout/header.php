@@ -27,7 +27,7 @@
         </div>
         
 
-        <?php session_start(); ?>
+        
 
         <div class="login_container">
             <?php if (isset($_SESSION['username'])): ?>

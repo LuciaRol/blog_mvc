@@ -85,6 +85,7 @@ class BlogController {
     public function login() {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
+        $error = ''; //Creamos esta variable para que si todo va bien, no de error al mostrarBlog
 
     if ($username && $password) {
         $user = $this->usuariosService->verificaCredenciales($username, $password);
@@ -98,7 +99,7 @@ class BlogController {
         $error = 'Complete todos los campos';
     }
 
-    $this->mostrarBlog($error); // Llama a mostrarBlog con el posible mensaje de error
+    $this->mostrarBlog($error); // Llama a mostrarBlog con el posible mensaje de error del login
 }
 
     public function logout() {
