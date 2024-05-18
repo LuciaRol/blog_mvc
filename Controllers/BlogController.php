@@ -177,16 +177,19 @@ class BlogController {
         }
     }
 
-    public function actualizarRol() {
+    public function actualizarUsuario() {
         $username = $_POST['username'] ?? '';
+        $nombre = $_POST['nombre'] ?? '';
+        $apellidos = $_POST['apellidos'] ?? '';
+        $email = $_POST['email'] ?? '';
         $nuevoRol = $_POST['rol'] ?? '';
-
-        if ($username && $nuevoRol) {
-            $resultado = $this->usuariosService->actualizarRol($username, $nuevoRol);
+    
+        if ($username && $nombre && $apellidos && $email && $nuevoRol) {
+            $resultado = $this->usuariosService->actualizarUsuario($username, $nombre, $apellidos, $email, $nuevoRol);
             if ($resultado === null) {
                 $this->mostrarUsuario(); // Redirige a mostrar usuario si la actualización es exitosa
             } else {
-                // Manejo de error si ocurre algún problema al actualizar el rol
+                // Manejo de error si ocurre algún problema al actualizar el usuario
                 $this->mostrarUsuario($resultado);
             }
         } else {
