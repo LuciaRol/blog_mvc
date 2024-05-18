@@ -8,7 +8,7 @@
         <nav class="nav_container">
             <a class="nav_link" href="<?= BASE_URL ?>?controller=Blog&action=mostrarblogsesion">Inicio</a>
             <a class="nav_link" href="<?= BASE_URL ?>?controller=Blog&action=mostrarUsuario">Info Usuario</a>
-            <a class="nav_link" href="<?= BASE_URL ?>?controller=Blog&action=mostrarCategoria2">Categoría 2</a>
+            <a class="nav_link" href="<?= BASE_URL ?>?controller=Blog&action=mostrarCategorias">Categorías</a>
             <a class="nav_link" href="">Contacto</a>
         </nav>
     </div>

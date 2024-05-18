@@ -4,6 +4,7 @@ namespace Controllers;
 use Lib\Pages;
 use Services\EntradasComentariosService; 
 use Services\UsuariosService; 
+use Services\CategoriasService;
 use Models\Blog;
 use Models\Usuarios;
 
@@ -12,6 +13,8 @@ class BlogController {
     private Pages $pagina;  
     private EntradasComentariosService $entradasService; 
     private UsuariosService $usuariosService;
+
+    private CategoriasService $categoriasService;
 
 
     public function __construct()
@@ -22,6 +25,9 @@ class BlogController {
         $this->entradasService = new EntradasComentariosService();
 
         $this->usuariosService = new UsuariosService();
+
+        $this->categoriasService = new CategoriasService();
+
 
     }
 
@@ -150,16 +156,17 @@ class BlogController {
         $this->pagina->render("Blog/mostrarUsuario", compact('nombre', 'apellidos', 'email', 'username', 'rol'));
     }
     
-    public function mostrarCategoria2($error=null) {
-
-         // Verifica si el usuario está autenticado usando la función sesion_usuario()
-         if (!$this->sesion_usuario()) {
-            
-         }
-     
-         // Renderiza la vista de la categoría
+    public function mostrarCategorias($error=null) {
+        // Verifica si el usuario está autenticado usando la función sesion_usuario()
+        if (!$this->sesion_usuario()) {
+            return;
+        }
+    
+        // Obtén los datos de las categorías usando el servicio de categorías
+        $categorias = $this->categoriasService->obtenerCategorias();
         
-        $this->pagina->render("Blog/mostrarCategoria2");   
+        // Renderiza la vista de categorías pasando los datos obtenidos
+        $this->pagina->render("Blog/mostrarCategorias", ['categorias' => $categorias]);   
     }
 
     public function mostrarblogsesion($error=null) {
