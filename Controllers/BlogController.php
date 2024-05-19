@@ -254,11 +254,28 @@ class BlogController {
         // Obtén las categorías utilizando el servicio de categorías
         $categorias = $this->categoriasService->obtenerCategorias();
     
-        // Pasar las categorías a la vista
-        $data = ['categorias' => $categorias];
-    
-        // Renderiza la vista de entradas pasando los datos obtenidos
+       
+            // Obtener todas las entradas desde el servicio
+        $entradas = $this->entradasService->findAll();
+
+        // Mirar si no hay entradas
+        $noResults = empty($entradas);
+
+        // Preparar los datos para la vista
+        $data = [
+            'categorias' => $categorias,
+            'entradas' => $entradas,
+            'noResults' => $noResults,
+        ];
+         
+        // Si hay un error, pasarlo a la vista
+        if ($error) {
+            $data['loginError'] = $error;
+        }
+
+        // Renderizar la vista mostrando las entradas
         $this->pagina->render("Blog/mostrarEntradas", $data);
+    
     }
     
     private function insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha) {
