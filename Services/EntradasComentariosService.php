@@ -25,5 +25,8 @@
         public function editarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha, $entrada_id) {
             return $this->repository->editarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha, $entrada_id);
         }
+        public function eliminarEntrada($entrada_id): bool {
+            // Llama al método del repositorio para eliminar la entrada
+            return $this->repository->eliminarEntrada($entrada_id);
+        }
     }
-?>

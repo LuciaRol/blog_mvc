@@ -103,4 +103,15 @@
                 return false; // Error al editar la entrada
             }
         }
+
+        public function eliminarEntrada($entrada_id): bool {
+            try {
+                $this->sql = $this->conexion->prepareSQL("DELETE FROM entradas WHERE id = :entrada_id");
+                $this->sql->bindValue(':entrada_id', $entrada_id, PDO::PARAM_INT);
+                $this->sql->execute();
+                return true; // Éxito al eliminar la entrada
+            } catch (PDOException $e) {
+                return false; // Error al eliminar la entrada
+            }
+        }
     }

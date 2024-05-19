@@ -255,10 +255,8 @@ class BlogController {
             $this->entradasService->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
         }
     }
-       
         // Obtén las categorías utilizando el servicio de categorías
         $categorias = $this->categoriasService->obtenerCategorias();
-    
        
             // Obtener todas las entradas desde el servicio
         $entradas = $this->entradasService->findAll();
@@ -280,9 +278,25 @@ class BlogController {
 
         // Renderizar la vista mostrando las entradas
         $this->pagina->render("Blog/mostrarEntradas", $data);
-    
+       
     }
     
+
+    public function eliminarEntrada() {
+        // Verifica si se recibió un ID de entrada válido
+        if (isset($_POST['entrada_id'])) {
+            $entrada_id = $_POST['entrada_id'];
+           
+            // Intenta eliminar la entrada utilizando el servicio correspondiente
+            $resultado = $this->entradasService->eliminarEntrada($entrada_id);
+            
+            // Redirige a mostrarEntradas() independientemente del resultado de la eliminación
+            $this->mostrarEntradas();
+        } else {
+            // Manejar el caso en que no se proporciona un ID de entrada válido
+            echo "ID de entrada no válido";
+        }
+    }
     private function insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha) {
         // Llama al método del servicio para insertar la entrada
         $resultado = $this->entradasService->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);

@@ -55,10 +55,13 @@ $BlogController = new BlogController();
                             </option>
                         <?php endforeach; ?>
                     </select><br>
-                                        
-                   
                     <input type="submit" value="Guardar cambios">
+                    
                 </form>
+                <form method="post" action="<?= BASE_URL ?>?controller=Blog&action=eliminarEntrada">
+                        <input type="hidden" name="entrada_id" value="<?php echo $entrada['entrada_id']; ?>">
+                        <input type="submit" value="Eliminar">
+                    </form>
             </li>
         <?php endforeach; ?>
     </ul>
