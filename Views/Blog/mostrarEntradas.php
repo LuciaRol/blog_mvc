@@ -32,6 +32,12 @@ $BlogController = new BlogController();
     
     <input type="submit" value="Enviar">
 </form>
+<?php
+// Verificar si hay errores y mostrar el mensaje
+if (isset($error_message)) {
+    echo "<p>$error_message</p>";
+}
+?>
 
 <!-- Listado de entradas existentes -->
 <?php if (!empty($entradas)): ?>

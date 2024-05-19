@@ -31,7 +31,7 @@ class EntradaController {
         if (!$this->sesion_usuario()) {
             return;
         }
-
+    
         // Procesa el formulario de creación o edición de entradas
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo']) && isset($_POST['descripcion']) && isset($_POST['categoria'])) {
             // Obtener el ID del usuario de la sesión
@@ -42,23 +42,12 @@ class EntradaController {
             $descripcion = $_POST['descripcion'];
             $categoria_id = $_POST['categoria'];
             $fecha = date('Y-m-d'); // Fecha actual
-
-
+    
             // Validar y sanear los valores
-            $errores = Validacion::validar($titulo, $descripcion, $categoria_id, $fecha);
-            if (!empty($errores)) {
-                // Si hay errores, puedes manejarlos de alguna manera, por ejemplo, redirigiendo con los errores
-                $this->pagina->render("error_view", ['errores' => $errores]);
-                return;
+            if (!$this->validasanea($titulo, $descripcion, $categoria_id, $fecha)) {
+                return; // Si hubo errores, terminar la ejecución de la función
             }
-            
-            // Saneamos los campos
-            $campos_saneados = Validacion::sanearCampos($titulo, $descripcion, $categoria_id, $fecha);
-            $titulo = $campos_saneados['titulo'];
-            $descripcion = $campos_saneados['descripcion'];
-            $categoria_id = $campos_saneados['categoria'];
-            $fecha = $campos_saneados['fecha'];
-
+    
             // Determinar si se está editando o creando una entrada nueva
             if (isset($_POST['entrada_id'])) {
                 // Editar la entrada existente
@@ -68,14 +57,42 @@ class EntradaController {
                 $this->entradasService->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
             }
         }
-
+    
         // Obtener los datos del blog
         $data = $this->obtenerDatosEntradas($error);
-
+    
         // Renderizar la vista mostrando las entradas
         $this->pagina->render("Blog/mostrarEntradas", $data);
     }
+    
+    private function validasanea(&$titulo, &$descripcion, &$categoria_id, &$fecha) {
+        // Validar los valores
+        $errores = Validacion::validar($titulo, $descripcion, $categoria_id, $fecha);
+        if (!empty($errores)) {
+            // Si hay errores, asignar el mensaje de error a una variable
+            $error_message = "Los campos están vacíos.";
+            
+            // Obtener los datos del blog
+            $data = $this->obtenerDatosEntradas();
 
+            // Agregar el mensaje de error a los datos
+            $data['error_message'] = $error_message;
+    
+            // Renderizar la vista mostrando el mensaje de error y los datos de las entradas
+            $this->pagina->render("Blog/mostrarEntradas", $data);
+            
+            return false; // Indicar que hubo errores
+        }
+        
+        // Saneamos los campos
+        $campos_saneados = Validacion::sanearCampos($titulo, $descripcion, $categoria_id, $fecha);
+        $titulo = $campos_saneados['titulo'];
+        $descripcion = $campos_saneados['descripcion'];
+        $categoria_id = $campos_saneados['categoria'];
+        $fecha = $campos_saneados['fecha'];
+    
+        return true; // Indicar que la validación y el saneamiento fueron exitosos
+    }
 
     public function obtenerDatosEntradas($error=null) {
         // Obtener todas las entradas desde el servicio

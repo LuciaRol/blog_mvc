@@ -62,18 +62,11 @@ class UsuarioController {
 
     // Función para verificar si el usuario está autenticado
     private function sesion_usuario(): bool {
-        // Verifica si hay una sesión iniciada
-        if (session_status() == PHP_SESSION_NONE) {
-            session_start();
-        }
-    
-        // Verifica si el usuario está autenticado
-        if (!isset($_SESSION['username'])) {
-            // Si el usuario no está autenticado, redirige al método de login
-            header("Location: /login");
-            exit();
-        }
-    
-        return true; // Retorna true si el usuario está autenticado
+        return (new BlogController())->sesion_usuario();
+    }
+
+    // Reutilización de la función login() del BlogController
+    private function login() {
+        return (new BlogController())->login();
     }
 }
