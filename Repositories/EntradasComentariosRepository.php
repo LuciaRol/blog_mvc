@@ -114,4 +114,38 @@
                 return false; // Error al eliminar la entrada
             }
         }
+
+        public function obtenerEntradasCategoria(string $categoria): ?array {
+            $entradaCommit = null;
+            try {
+                $this->sql = $this->conexion->prepareSQL("SELECT   	
+                                                                entradas.id as entrada_id,
+                                                                entradas.titulo,
+                                                                entradas.descripcion,
+                                                                entradas.fecha,
+                                                                usuarios.nombre,
+                                                                usuarios.apellidos,
+                                                                usuarios.email,
+                                                                usuarios.username,	
+                                                                usuarios.rol,
+                                                                categorias.nombre as categoria
+                                                            FROM entradas 
+                                                            INNER JOIN usuarios
+                                                            ON usuarios.id = entradas.usuario_id
+                                                            INNER JOIN categorias
+                                                            ON categorias.id = entradas.categoria_id
+                                                            WHERE categorias.nombre = :categoria");
+                
+                $this->sql->bindValue(':categoria', $categoria, PDO::PARAM_STR);
+                $this->sql->execute();
+                $entradaCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->sql->closeCursor();
+                $entradaCommit = $entradaCommitData ?: null;
+                
+            } catch (PDOException $e) {
+                $entradaCommit = $e->getMessage();
+            }
+        
+            return $entradaCommit;
+        }
     }

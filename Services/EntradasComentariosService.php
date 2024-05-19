@@ -29,4 +29,13 @@
             // Llama al método del repositorio para eliminar la entrada
             return $this->repository->eliminarEntrada($entrada_id);
         }
+
+        public function buscarPorCategoria(string $categoria): ?array {
+            // Obtener todas las entradas
+            return $this->repository->obtenerentradascategoria($categoria);
+    
+           
+    
+           
+        }
     }

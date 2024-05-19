@@ -71,6 +71,31 @@ class BlogController {
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", $data);
     }
+
+    public function buscarPorCategoria() {
+        // Obtener la categoría seleccionada
+        $selectedCategory = isset($_POST['categoria']) ? $_POST['categoria'] : '';
+    
+        // Obtener los datos para el blog
+        $data = $this->obtenerDatosBlog();
+    
+        // Obtener todas las entradas
+        $entradas = $this->entradasService->buscarPorCategoria($selectedCategory);
+    
+        // Filtrar las entradas por la categoría seleccionada
+        if (!empty($selectedCategory)) {
+            $entradas = array_filter($entradas, function($entrada) use ($selectedCategory) {
+                return $entrada['categoria'] === $selectedCategory;
+            });
+        }
+    
+        // Actualizar los datos con las entradas filtradas y la categoría seleccionada
+        $data['entradas'] = $entradas;
+        $data['selectedCategory'] = $selectedCategory;
+    
+        // Instanciar la clase Pages para renderizar la vista
+        $this->pagina->render("Blog/mostrarBlog", $data);
+    }
     
     public function registroUsuario() {
         // Verifica si se ha enviado el formulario de registro

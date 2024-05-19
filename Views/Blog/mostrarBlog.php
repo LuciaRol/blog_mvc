@@ -28,6 +28,8 @@
         <div class="content">
             <h2>Últimos artículos</h2>
              <!-- Dropdown for selecting category -->
+
+            <form action="<?= BASE_URL ?>?controller=Blog&action=buscarPorCategoria" method="POST">
             <label for="categoria">Seleccione una categoría:</label>
             <select id="categoria" name="categoria">
                 <?php
@@ -40,6 +42,10 @@
                     <option value="<?php echo htmlspecialchars($categoria, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($categoria, ENT_QUOTES, 'UTF-8'); ?></option>
                 <?php endforeach; ?>
             </select>
+             <button type="submit" class="search_button">Filtrar Categoria</button>
+            </form>
+
+
 
             <?php if ($noResults): ?>
                 <p>No se ha encontrado nada con la palabra "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</p>
