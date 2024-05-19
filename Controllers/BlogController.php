@@ -142,7 +142,7 @@ class BlogController {
             $this->mostrarBlog();
         }
     }
-    
+    #######################
     // CATEGORIAS
     public function mostrarCategorias($error=null) {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()
@@ -187,7 +187,7 @@ class BlogController {
         $this->pagina->render("Blog/mostrarCategorias", $data);
         
     }
-
+#######################
     // Entradas
     public function mostrarEntradas($error=null) {
         if (!$this->sesion_usuario()) {

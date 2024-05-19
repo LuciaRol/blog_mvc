@@ -21,7 +21,7 @@
     <p><?= $mensaje ?></p>
 <?php endif; ?>
 
-<form method="post" action="<?= BASE_URL ?>?controller=Blog&action=registroCategoria" method="POST">
+<form method="post" action="<?= BASE_URL ?>?controller=Categoria&action=registroCategoria" method="POST">
     <input type="text" name="nueva_categoria" placeholder="Nombre de la nueva categoría">
     <button type="submit">Guardar</button>
 </form>
