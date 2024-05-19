@@ -24,6 +24,23 @@
 </head>
 <body>
 
+<form method="post" action="<?= BASE_URL ?>?controller=Blog&action=mostrarEntradas" method="POST">
+    <label for="titulo">Título:</label><br>
+    <input type="text" id="titulo" name="titulo"><br>
+    
+    <label for="descripcion">Descripción:</label><br>
+    <textarea id="descripcion" name="descripcion"></textarea><br>
+    
+    <label for="categoria">Categoría:</label><br>
+    <select id="categoria" name="categoria">
+        <?php foreach ($categorias as $categoria): ?>
+            <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+        <?php endforeach; ?>
+    </select><br>
+    
+    <input type="submit" value="Enviar">
+</form>
+
 <main>
     <div>
         <h2>Últimos artículos</h2>
@@ -80,39 +97,6 @@
         <?php endif; ?>
     </div>
 
-    <aside>
-        <h3>¡Regístrate ahora!</h3>
-        <form action="<?= BASE_URL ?>?controller=Blog&action=registroUsuario" method="POST">
-            <div>
-                <input type="text" placeholder="Nombre" name="nombre">
-                <input type="text" placeholder="Apellidos" name="apellidos">
-                <input type="email" placeholder="Email" name="email">
-                <input type="text" placeholder="Username" name="username">
-                <input type="password" placeholder="Contraseña" name="contrasena">
-                <button type="submit" name="registro">Registrarse</button>
-            </div>
-        </form>
-
-        <h3>Agregar nueva entrada</h3>
-        <form method="POST" action="<?= BASE_URL ?>?controller=Blog&action=mostrarEntradas">
-            <label for="titulo">Título:</label><br>
-            <input type="text" id="titulo" name="titulo"><br>
-            
-            <label for="descripcion">Descripción:</label><br>
-            <textarea id="descripcion" name="descripcion"></textarea><br>
-            
-            <label for="categoria">Categoría:</label><br>
-            <select id="categoria" name="categoria">
-                <?php foreach ($categorias as $categoria): ?>
-                    <option value="<?php echo htmlspecialchars($categoria['id'], ENT_QUOTES, 'UTF-8'); ?>">
-                        <?php echo htmlspecialchars($categoria['nombre'], ENT_QUOTES, 'UTF-8'); ?>
-                    </option>
-                <?php endforeach; ?>
-            </select><br>
-            
-            <input type="submit" value="Enviar">
-        </form>
-    </aside>
 </main>
 
 </body>
