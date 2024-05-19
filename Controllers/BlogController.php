@@ -29,34 +29,47 @@ class BlogController {
 
     }
 
-    public function mostrarBlog($error=null, $usuarioRecordado=null) {
+    public function obtenerDatosBlog($error=null) {
         // Obtener todas las entradas desde el servicio
         $entradas = $this->entradasService->findAll();
-    
+        
         // Miramos si no hay entradas
         $noResults = empty($entradas);
-    
+        
         $data = ['entradas' => $entradas, 'noResults' => $noResults];
-    
+        
         if ($error) {
             $data['loginError'] = $error;
         }
+        
+        return $data;
+    }
+    
+    
+    public function mostrarBlog($error=null, $usuarioRecordado=null) {
+        // Obtener los datos para el blog
+        $data = $this->obtenerDatosBlog($error);
+        
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", $data);   
     }
 
     public function buscar() {
         $searchQuery = isset($_POST['q']) ? $_POST['q'] : '';
-
-        #$searchQuery = 'Introducción';
+    
+        // Obtener los datos para el blog
+        $data = $this->obtenerDatosBlog();
+    
         // $searchquery para hacer la búsqueda
         $entradas = $this->entradasService->buscarEntradas($searchQuery);
-
-        // Miramos si no hay entradas
-        $noResults = empty($entradas);
+    
+        // Actualizar los datos con las entradas de la búsqueda y la consulta de búsqueda
+        $data['entradas'] = $entradas;
+        $data['searchQuery'] = $searchQuery;
+        $data['noResults'] = empty($entradas);
     
         // Instanciar la clase Pages para renderizar la vista
-        $this->pagina->render("Blog/mostrarBlog", ['entradas' => $entradas, 'searchQuery' => $searchQuery, 'noResults' => $noResults]);
+        $this->pagina->render("Blog/mostrarBlog", $data);
     }
     
     public function registroUsuario() {
@@ -143,79 +156,5 @@ class BlogController {
         }
     }
  
-    // // Entradas
-    // public function mostrarEntradas($error=null) {
-    //     if (!$this->sesion_usuario()) {
-    //         return;
-    //     }
-        
-    //     if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo']) && isset($_POST['descripcion']) && isset($_POST['categoria'])) {
-    //         // Obtener usuario ID de la sesión
-    //         // $usuario_id = $_SESSION['id'];
-    //         $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
-
-    //         $usuario_id = $usuario->getId();
-    //         // Obtener datos del formulario
-    //         $titulo = $_POST['titulo'];
-    //         $descripcion = $_POST['descripcion'];
-    //         $categoria_id = $_POST['categoria'];
-    //         $fecha = date('Y-m-d'); // Fecha actual
-    
-    //         if (isset($_POST['entrada_id'])) {
-    //         // Editar la entrada existente
-    //         $this->entradasService->editarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha, $_POST['entrada_id']);
-    //     } else {
-    //         // Insertar nueva entrada
-    //         $this->entradasService->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
-    //     }
-    // }
-    //     // Obtén las categorías utilizando el servicio de categorías
-    //     $categorias = $this->categoriasService->obtenerCategorias();
-       
-    //         // Obtener todas las entradas desde el servicio
-    //     $entradas = $this->entradasService->findAll();
-
-    //     // Mirar si no hay entradas
-    //     $noResults = empty($entradas);
-
-    //     // Preparar los datos para la vista
-    //     $data = [
-    //         'categorias' => $categorias,
-    //         'entradas' => $entradas,
-    //         'noResults' => $noResults,
-    //     ];
-         
-    //     // Si hay un error, pasarlo a la vista
-    //     if ($error) {
-    //         $data['loginError'] = $error;
-    //     }
-
-    //     // Renderizar la vista mostrando las entradas
-    //     $this->pagina->render("Blog/mostrarEntradas", $data);
-       
-    // }
-    
-
-    // public function eliminarEntrada() {
-    //     // Verifica si se recibió un ID de entrada válido
-    //     if (isset($_POST['entrada_id'])) {
-    //         $entrada_id = $_POST['entrada_id'];
-           
-    //         // Intenta eliminar la entrada utilizando el servicio correspondiente
-    //         $resultado = $this->entradasService->eliminarEntrada($entrada_id);
-            
-    //         // Redirige a mostrarEntradas() independientemente del resultado de la eliminación
-    //         $this->mostrarEntradas();
-    //     } else {
-    //         // Manejar el caso en que no se proporciona un ID de entrada válido
-    //         echo "ID de entrada no válido";
-    //     }
-    // }
-    // private function insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha) {
-    //     // Llama al método del servicio para insertar la entrada
-    //     $resultado = $this->entradasService->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
-    // }
-
-
 }
 
