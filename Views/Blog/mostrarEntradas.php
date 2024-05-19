@@ -50,12 +50,12 @@ $BlogController = new BlogController();
                     <label for="categoria<?php echo $entrada['entrada_id']; ?>">Categoría:</label>
                     <select id="categoria<?php echo $entrada['entrada_id']; ?>" name="categoria">
                         <?php foreach ($categorias as $categoria): ?>
-                            <option value="<?php echo $categoria['id']; ?>" <?php echo (isset($entrada['categoria_id']) && $entrada['categoria_id'] == $categoria['id']) ? 'selected' : ''; ?>>
+                            <option value="<?php echo $categoria['id']; ?>" <?php echo ($entrada['categoria'] == $categoria['nombre']) ? 'selected' : ''; ?>>
                                 <?php echo htmlspecialchars($categoria['nombre'], ENT_QUOTES, 'UTF-8'); ?>
                             </option>
                         <?php endforeach; ?>
                     </select><br>
-                    
+                                        
                    
                     <input type="submit" value="Guardar cambios">
                 </form>

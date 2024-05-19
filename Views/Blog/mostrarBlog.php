@@ -39,6 +39,7 @@
                             <li>
                                 <h3><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h3>
                                 <p><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
+                                <p><?php echo htmlspecialchars($entrada['categoria'], ENT_QUOTES, 'UTF-8'); ?></p>
                             </li>
                         <?php endforeach; ?>
                     </ul>
