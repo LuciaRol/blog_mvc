@@ -87,6 +87,11 @@ class BlogController {
         // Obtener todas las entradas
         $entradas = $this->entradasService->buscarPorCategoria($selectedCategory);
     
+        // Si no se encontraron entradas, inicializar $entradas como un array vacío
+        if ($entradas === null) {
+            $entradas = [];
+        }
+    
         // Filtrar las entradas por la categoría seleccionada
         if (!empty($selectedCategory)) {
             $entradas = array_filter($entradas, function($entrada) use ($selectedCategory) {
@@ -97,10 +102,16 @@ class BlogController {
         // Actualizar los datos con las entradas filtradas y la categoría seleccionada
         $data['entradas'] = $entradas;
         $data['selectedCategory'] = $selectedCategory;
+        $data['searchQuery'] = $selectedCategory;
+
+    
+        // Si no hay resultados de búsqueda, establecer 'noResults' en true
+        $data['noResults'] = empty($entradas);
     
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", $data);
     }
+    
     
     public function registroUsuario() {
         // Verifica si se ha enviado el formulario de registro

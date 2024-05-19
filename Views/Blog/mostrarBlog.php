@@ -43,7 +43,7 @@
 
 
             <?php if ($noResults): ?>
-                <p>No se ha encontrado nada con la palabra "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</p>
+                <p>No se ha encontrado nada con la palabra o categoria "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</p>
             <?php else: ?>
                 <?php if (!empty($searchQuery)): ?>
                     <h3>Resultados de búsqueda para "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</h3>
