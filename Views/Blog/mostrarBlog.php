@@ -27,6 +27,20 @@
     <main class="grid-container">
         <div class="content">
             <h2>Últimos artículos</h2>
+             <!-- Dropdown for selecting category -->
+            <label for="categoria">Seleccione una categoría:</label>
+            <select id="categoria" name="categoria">
+                <?php
+                    // Extract unique categories from $entradas
+                    $categorias = array_unique(array_column($entradas, 'categoria'));
+                    
+                    // Generate options for the dropdown
+                    foreach ($categorias as $categoria):
+                ?>
+                    <option value="<?php echo htmlspecialchars($categoria, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($categoria, ENT_QUOTES, 'UTF-8'); ?></option>
+                <?php endforeach; ?>
+            </select>
+
             <?php if ($noResults): ?>
                 <p>No se ha encontrado nada con la palabra "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</p>
             <?php else: ?>
