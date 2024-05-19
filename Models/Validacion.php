@@ -1,52 +1,60 @@
 <?php
 
+namespace Models;
+use DateTime;
+
 class Validacion {
 
-    public static function validar($titulo, $descripcion, $categoria) {
+    public static function validar($titulo, $descripcion, $categoria, $fecha) {
         // Inicializamos un array para almacenar mensajes de error
         $errores = [];
     
-        // Comprobamos si el titulo está vacío
-        if (empty($titulo)) {
-            $errores['titulo'] = "Es obligatorio introducir el titulo.";
-        } 
-
-        // Comprobamos si el descripcion está vacío
-        if (empty($descripcion)) {
-            $errores['descripcion'] = "Es obligatorio introducir el descripcion.";
-        } 
-
-        // Comprobamos si el titulo está vacío
-        if (empty($categoria)) {
-            $errores['categoria'] = "Es obligatorio introducir el categoria.";
+        // Comprobamos si el título está vacío o contiene solo espacios en blanco
+        if (empty($titulo) || trim($titulo) === '') {
+            $errores['titulo'] = "Es obligatorio introducir el título.";
         } 
     
-        // Si hay errores, devolvemos un array con los mensajes de error
-        if (!empty($errores)) {
-            return $errores;
+        // Comprobamos si la descripción está vacía o contiene solo espacios en blanco
+        if (empty($descripcion) || trim($descripcion) === '') {
+            $errores['descripcion'] = "Es obligatorio introducir la descripción.";
+        } 
+    
+        // Comprobamos si la categoría está vacía o contiene solo espacios en blanco
+        if (empty($categoria) || trim($categoria) === '') {
+            $errores['categoria'] = "Es obligatorio introducir la categoría.";
+        } 
+    
+        // Comprobamos si la fecha no es válida o está vacía
+        if (empty($fecha) || !strtotime($fecha)) {
+            $errores['fecha'] = "La fecha no es válida.";
         }
     
-        return;
+        // Si hay errores, devolvemos un array con los mensajes de error
+        return $errores;
     }
 
-    public static function sanearCampos($titulo, $descripcion, $categoria): array {
+    public static function sanearCampos($titulo, $descripcion, $categoria, $fecha): array {
         // Aplicar trim a todos los campos para eliminar espacios en blanco al inicio y al final
         $titulo = trim($titulo);
         $descripcion = trim($descripcion);
         $categoria = trim($categoria);
+        $fecha = trim($fecha);
     
         // Sanear el titulo: filtrar solo letras (mayúsculas y minúsculas), números y espacios, eliminando otros caracteres
         $titulo = self::sanearString($titulo);
     
         // Sanear la descripcion
         $descripcion = self::sanearString($descripcion);
-
-         // Sanear la categoria
-         $categoria = self::sanearString($categoria);
     
-        
-        return ['titulo' => $titulo, 'fecha' => $descripcion, 'importe' => $categoria];
+        // Sanear la categoria
+        $categoria = self::sanearString($categoria);
+    
+        // Sanear la fecha
+        $fecha = self::sanearFecha($fecha);
+    
+        return ['titulo' => $titulo, 'descripcion' => $descripcion, 'categoria' => $categoria, 'fecha' => $fecha];
     }
+    
     
     // Función para sanear strings
     public static function sanearString(string $texto): string {

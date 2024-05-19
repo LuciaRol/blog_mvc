@@ -6,6 +6,7 @@ use Lib\Pages;
 use Services\UsuariosService;
 use Services\EntradasComentariosService;
 use Services\CategoriasService;
+use Models\Validacion;
 
 class EntradaController {
 
@@ -41,6 +42,22 @@ class EntradaController {
             $descripcion = $_POST['descripcion'];
             $categoria_id = $_POST['categoria'];
             $fecha = date('Y-m-d'); // Fecha actual
+
+
+            // Validar y sanear los valores
+            $errores = Validacion::validar($titulo, $descripcion, $categoria_id, $fecha);
+            if (!empty($errores)) {
+                // Si hay errores, puedes manejarlos de alguna manera, por ejemplo, redirigiendo con los errores
+                $this->pagina->render("error_view", ['errores' => $errores]);
+                return;
+            }
+            
+            // Saneamos los campos
+            $campos_saneados = Validacion::sanearCampos($titulo, $descripcion, $categoria_id, $fecha);
+            $titulo = $campos_saneados['titulo'];
+            $descripcion = $campos_saneados['descripcion'];
+            $categoria_id = $campos_saneados['categoria'];
+            $fecha = $campos_saneados['fecha'];
 
             // Determinar si se está editando o creando una entrada nueva
             if (isset($_POST['entrada_id'])) {
