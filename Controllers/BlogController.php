@@ -214,13 +214,6 @@ class BlogController {
     private function insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha) {
         // Llama al método del servicio para insertar la entrada
         $resultado = $this->entradasService->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
-        if ($resultado) {
-            // Entrada insertada correctamente
-            // Redirige a alguna página de éxito o muestra un mensaje
-        } else {
-            // Error al insertar la entrada
-            // Maneja el error adecuadamente
-        }
     }
 
 
