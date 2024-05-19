@@ -22,5 +22,8 @@
         public function insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha) {
             return $this->repository->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
         }
+        public function editarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha, $entrada_id) {
+            return $this->repository->editarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha, $entrada_id);
+        }
     }
 ?>

@@ -247,10 +247,15 @@ class BlogController {
             $categoria_id = $_POST['categoria'];
             $fecha = date('Y-m-d'); // Fecha actual
     
+            if (isset($_POST['entrada_id'])) {
+            // Editar la entrada existente
+            $this->entradasService->editarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha, $_POST['entrada_id']);
+        } else {
             // Insertar nueva entrada
-            $this->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
+            $this->entradasService->insertarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha);
         }
-    
+    }
+       
         // Obtén las categorías utilizando el servicio de categorías
         $categorias = $this->categoriasService->obtenerCategorias();
     

@@ -13,6 +13,7 @@
             $entradaCommit = null;
             try {
                 $this->sql = $this->conexion->prepareSQL("SELECT   	
+                                                                entradas.id as entrada_id,
                                                                 entradas.titulo,
                                                                 entradas.descripcion,
                                                                 entradas.fecha,
@@ -86,5 +87,20 @@
                 return false; // Error al insertar la entrada
             }
         }
-        
+
+        public function editarEntrada($usuario_id, $categoria_id, $titulo, $descripcion, $fecha, $entrada_id) {
+            try {
+                $this->sql = $this->conexion->prepareSQL("UPDATE entradas SET usuario_id = :usuario_id, categoria_id = :categoria_id, titulo = :titulo, descripcion = :descripcion, fecha = :fecha WHERE id = :entrada_id");
+                $this->sql->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->bindValue(':categoria_id', $categoria_id, PDO::PARAM_INT);
+                $this->sql->bindValue(':titulo', $titulo, PDO::PARAM_STR);
+                $this->sql->bindValue(':descripcion', $descripcion, PDO::PARAM_STR);
+                $this->sql->bindValue(':fecha', $fecha, PDO::PARAM_STR);
+                $this->sql->bindValue(':entrada_id', $entrada_id, PDO::PARAM_INT);
+                $this->sql->execute();
+                return true; // Éxito al editar la entrada
+            } catch (PDOException $e) {
+                return false; // Error al editar la entrada
+            }
+        }
     }
