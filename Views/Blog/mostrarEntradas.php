@@ -16,7 +16,7 @@ $BlogController = new BlogController();
 <body>
 
 <!-- Formulario para crear nueva entrada -->
-<form method="post" action="<?= BASE_URL ?>?controller=Blog&action=mostrarEntradas">
+<form method="post" action="<?= BASE_URL ?>?controller=Entrada&action=mostrarEntradas">
     <label for="titulo">Título:</label><br>
     <input type="text" id="titulo" name="titulo"><br>
     
@@ -38,7 +38,7 @@ $BlogController = new BlogController();
     <ul>
         <?php foreach ($entradas as $entrada): ?>
             <li>
-                <form method="post" action="<?= BASE_URL ?>?controller=Blog&action=mostrarEntradas">
+                <form method="post" action="<?= BASE_URL ?>?controller=Entrada&action=mostrarEntradas">
                     <input type="hidden" name="entrada_id" value="<?php echo $entrada['entrada_id']; ?>">
                     
                     <label for="titulo_<?php echo $entrada['entrada_id']; ?>">Título:</label>
@@ -58,7 +58,7 @@ $BlogController = new BlogController();
                     <input type="submit" value="Guardar cambios">
                     
                 </form>
-                <form method="post" action="<?= BASE_URL ?>?controller=Blog&action=eliminarEntrada">
+                <form method="post" action="<?= BASE_URL ?>?controller=Entrada&action=eliminarEntrada">
                         <input type="hidden" name="entrada_id" value="<?php echo $entrada['entrada_id']; ?>">
                         <input type="submit" value="Eliminar">
                     </form>
