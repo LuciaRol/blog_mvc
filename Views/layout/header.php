@@ -21,9 +21,7 @@
                 <input class="search_input" type="text" name="q" placeholder="Busca">
                 <button type="submit" class="search_button">Buscar</button>
             </form>
-            <form action="<?= BASE_URL ?>?controller=Blog&action=mostrarBlog" method="POST">
-                <button type="submit" class="search_button">Borrar Búsqueda</button>
-            </form>
+            
         </div>
         
 
