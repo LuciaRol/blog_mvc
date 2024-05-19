@@ -31,17 +31,12 @@
 
             <form action="<?= BASE_URL ?>?controller=Blog&action=buscarPorCategoria" method="POST">
             <label for="categoria">Seleccione una categoría:</label>
-            <select id="categoria" name="categoria">
-                <?php
-                    // Extract unique categories from $entradas
-                    $categorias = array_unique(array_column($entradas, 'categoria'));
-                    
-                    // Generate options for the dropdown
-                    foreach ($categorias as $categoria):
-                ?>
-                    <option value="<?php echo htmlspecialchars($categoria, ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($categoria, ENT_QUOTES, 'UTF-8'); ?></option>
-                <?php endforeach; ?>
-            </select>
+                <select id="categoria" name="categoria">
+                    <?php foreach ($categorias as $categoria): ?>
+                        <option value="<?php echo htmlspecialchars($categoria['nombre'], ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($categoria['nombre'], ENT_QUOTES, 'UTF-8'); ?></option>
+                    <?php endforeach; ?>
+                </select>
+
              <button type="submit" class="search_button">Filtrar Categoria</button>
             </form>
 

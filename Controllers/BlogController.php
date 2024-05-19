@@ -36,8 +36,12 @@ class BlogController {
         // Miramos si no hay entradas
         $noResults = empty($entradas);
         
-        $data = ['entradas' => $entradas, 'noResults' => $noResults];
+         // Obtener las categorías utilizando el servicio de categorías
+         $categorias = $this->categoriasService->obtenerCategorias();
         
+        
+        $data = ['entradas' => $entradas, 'noResults' => $noResults, 'categorias' => $categorias];
+
         if ($error) {
             $data['loginError'] = $error;
         }
@@ -62,11 +66,12 @@ class BlogController {
     
         // $searchquery para hacer la búsqueda
         $entradas = $this->entradasService->buscarEntradas($searchQuery);
-    
+
         // Actualizar los datos con las entradas de la búsqueda y la consulta de búsqueda
         $data['entradas'] = $entradas;
         $data['searchQuery'] = $searchQuery;
         $data['noResults'] = empty($entradas);
+     
     
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", $data);
