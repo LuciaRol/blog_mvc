@@ -58,7 +58,7 @@ class BlogController {
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", ['entradas' => $entradas, 'searchQuery' => $searchQuery, 'noResults' => $noResults]);
     }
-    // USUARIO
+    
     public function registroUsuario() {
         // Verifica si se ha enviado el formulario de registro
         if (isset($_POST['registro'])) {
@@ -135,27 +135,6 @@ class BlogController {
         return true; // Retorna true si el usuario está autenticado
     }
 
-    public function mostrarUsuario($error=null) {
-        // Verifica si el usuario está autenticado usando la función sesion_usuario()
-        if (!$this->sesion_usuario()) {
-            return;
-        }
-    
-        // Obtén los datos del usuario autenticado
-        $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
-        
-        // Obtén todas las propiedades del usuario
-        $nombre = $usuario->getNombre();
-        $apellidos = $usuario->getApellidos();
-        $email = $usuario->getEmail();
-        $username = $usuario->getUsername();
-        $rol = $usuario->getRol();
-    
-        // Renderiza la vista de usuario pasando las propiedades del usuario
-        $this->pagina->render("Blog/mostrarUsuario", compact('nombre', 'apellidos', 'email', 'username', 'rol'));
-    }
-    
-   
     public function mostrarblogsesion($error=null) {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()
         if ($this->sesion_usuario()) {
@@ -163,27 +142,7 @@ class BlogController {
             $this->mostrarBlog();
         }
     }
-
-    public function actualizarUsuario() {
-        $username = $_POST['username'] ?? '';
-        $nombre = $_POST['nombre'] ?? '';
-        $apellidos = $_POST['apellidos'] ?? '';
-        $email = $_POST['email'] ?? '';
-        $nuevoRol = $_POST['rol'] ?? '';
     
-        if ($username && $nombre && $apellidos && $email && $nuevoRol) {
-            $resultado = $this->usuariosService->actualizarUsuario($username, $nombre, $apellidos, $email, $nuevoRol);
-            if ($resultado === null) {
-                $this->mostrarUsuario(); // Redirige a mostrar usuario si la actualización es exitosa
-            } else {
-                // Manejo de error si ocurre algún problema al actualizar el usuario
-                $this->mostrarUsuario($resultado);
-            }
-        } else {
-            // Manejo de error si los datos del formulario no son válidos
-            $this->mostrarUsuario("Datos del formulario no válidos");
-        }
-    }
     // CATEGORIAS
     public function mostrarCategorias($error=null) {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()

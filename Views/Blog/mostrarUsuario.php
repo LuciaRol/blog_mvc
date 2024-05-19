@@ -20,7 +20,7 @@
                     <p class="card-text">Nombre de usuario: <?php echo htmlspecialchars($username); ?></p>
                     <p class="card-text">Rol: <?php echo htmlspecialchars($rol); ?></p>
 
-                    <form action="<?= BASE_URL ?>?controller=Blog&action=actualizarUsuario" method="post">
+                    <form action="<?= BASE_URL ?>?controller=Usuario&action=actualizarUsuario" method="post">
                         <div class="mb-3">
                             <label for="nombre" class="form-label">Nombre:</label>
                             <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo htmlspecialchars($nombre); ?>">
