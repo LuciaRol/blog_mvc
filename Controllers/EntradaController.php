@@ -52,31 +52,36 @@ class EntradaController {
             }
         }
 
-        // Obtener las categorías utilizando el servicio de categorías
-        $categorias = $this->categoriasService->obtenerCategorias();
-
-        // Obtener todas las entradas desde el servicio
-        $entradas = $this->entradasService->findAll();
-
-        // Verificar si no hay entradas
-        $noResults = empty($entradas);
-
-        // Preparar los datos para la vista
-        $data = [
-            'categorias' => $categorias,
-            'entradas' => $entradas,
-            'noResults' => $noResults,
-        ];
-
-        // Si hay un error, pasarlo a la vista
-        if ($error) {
-            $data['loginError'] = $error;
-        }
+        // Obtener los datos del blog
+        $data = $this->obtenerDatosEntradas($error);
 
         // Renderizar la vista mostrando las entradas
         $this->pagina->render("Blog/mostrarEntradas", $data);
     }
 
+
+    public function obtenerDatosEntradas($error=null) {
+        // Obtener todas las entradas desde el servicio
+        $entradas = $this->entradasService->findAll();
+        
+        // Miramos si no hay entradas
+        $noResults = empty($entradas);
+        
+        // Obtener las categorías utilizando el servicio de categorías
+        $categorias = $this->categoriasService->obtenerCategorias();
+        
+        $data = [
+            'categorias' => $categorias,
+            'entradas' => $entradas,
+            'noResults' => $noResults
+        ];
+        
+        if ($error) {
+            $data['loginError'] = $error;
+        }
+        
+        return $data;
+    }
     // Función para eliminar una entrada del blog
     public function eliminarEntrada() {
         // Verificar si se recibió un ID de entrada válido
