@@ -85,7 +85,7 @@
         <aside class="sidebar">
             <h3 class="sidebar_title">¡Regístrate ahora!</h3>
             <?php
-            // Verificar si hay errores y mostrar el mensaje
+            // Verificar si hay errores de registro y mostrar el mensaje
             if (isset($error_registro) && is_array($error_registro)) {
                 echo "<ul>";
                 foreach ($error_registro as $error) {
