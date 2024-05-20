@@ -45,29 +45,7 @@ class UsuarioController {
     // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
     $this->pagina->render("Usuario/mostrarUsuario", $data);
     }
-    
-    
 
-    // public function actualizarUsuario() {
-    //     $username = $_POST['username'] ?? '';
-    //     $nombre = $_POST['nombre'] ?? '';
-    //     $apellidos = $_POST['apellidos'] ?? '';
-    //     $email = $_POST['email'] ?? '';
-    //     $nuevoRol = $_POST['rol'] ?? '';
-    
-    //     if ($username && $nombre && $apellidos && $email && $nuevoRol) {
-    //         $resultado = $this->usuariosService->actualizarUsuario($username, $nombre, $apellidos, $email, $nuevoRol);
-    //         if ($resultado === null) {
-    //             $this->mostrarUsuario(); // Redirige a mostrar usuario si la actualización es exitosa
-    //         } else {
-    //             // Manejo de error si ocurre algún problema al actualizar el usuario
-    //             $this->mostrarUsuario($resultado);
-    //         }
-    //     } else {
-    //         // Manejo de error si los datos del formulario no son válidos
-    //         $this->mostrarUsuario("Datos del formulario no válidos");
-    //     }
-    // }
 
     public function actualizarUsuario() {
         // Recibir datos del formulario
@@ -102,7 +80,7 @@ class UsuarioController {
     
 
 
-    private function validarSaneaUsuario($username, $nombre, $apellidos, $email, $rol) {
+    public function validarSaneaUsuario($username, $nombre, $apellidos, $email, $rol) {
         // Validar los valores
         $errores = Validacion::validarDatosUsuario($username, $nombre, $apellidos, $email, $rol);
     
@@ -127,12 +105,12 @@ class UsuarioController {
     }
 
     // Función para verificar si el usuario está autenticado
-    private function sesion_usuario(): bool {
+    public function sesion_usuario(): bool {
         return (new BlogController())->sesion_usuario();
     }
 
     // Reutilización de la función login() del BlogController
-    private function login() {
+    public function login() {
         return (new BlogController())->login();
     }
 }
