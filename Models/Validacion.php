@@ -76,7 +76,7 @@ class Validacion {
             $errores['email'] = "El email no es válido.";
         }
 
-        if (empty($rol) || !in_array($rol, ['admin', 'user'])) {
+        if (empty($rol) || !in_array($rol, ['admin', 'usur'])) {
             $errores['rol'] = "El rol no es válido.";
         }
 

@@ -84,6 +84,16 @@
 
         <aside class="sidebar">
             <h3 class="sidebar_title">¡Regístrate ahora!</h3>
+            <?php
+            // Verificar si hay errores y mostrar el mensaje
+            if (isset($error_registro) && is_array($error_registro)) {
+                echo "<ul>";
+                foreach ($error_registro as $error) {
+                    echo "<li>$error</li>";
+                }
+                echo "</ul>";
+            }
+            ?>
             <form action="<?= BASE_URL ?>?controller=Blog&action=registroUsuario" method="POST">
             <div class="sidebar_inputs">
            

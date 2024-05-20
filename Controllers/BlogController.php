@@ -5,7 +5,7 @@ use Lib\Pages;
 use Services\EntradasComentariosService; 
 use Services\UsuariosService; 
 use Services\CategoriasService;
-
+use Models\Validacion;
 
 class BlogController {
 
@@ -50,9 +50,14 @@ class BlogController {
     }
     
     
-    public function mostrarBlog($error=null, $usuarioRecordado=null) {
+    public function mostrarBlog($error=null, $usuarioRecordado=null, $errorregistro = null) {
         // Obtener los datos para el blog
         $data = $this->obtenerDatosBlog($error);
+        
+        // Si hay un error, agregarlo a los datos para ser renderizado
+        if ($errorregistro !== null) {
+            $data['error_registro'] = $errorregistro;
+        }
         
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", $data);   
@@ -122,22 +127,53 @@ class BlogController {
             $email = $_POST['email'];
             $username = $_POST['username'];
             $contrasena = $_POST['contrasena'];
-            $rol = 'usur'; // Todos los usuarios son usur por defecto
-
-            // Llama al servicio de usuarios para registrar al usuario
+            $rol = 'usur'; // Todos los usuarios son 'usur' por defecto
+            
+          
+            // Validar y sanear los datos del usuario
+            $usuarioSaneado = $this->validarSanear($username, $nombre, $apellidos, $email, $rol);
+            if (!$usuarioSaneado) {
+                // Si los datos no son válidos, detiene el proceso de registro
+                return;
+            }
+    
+            // Los datos saneados ahora están disponibles para su uso
+            $nombre = $usuarioSaneado['nombre'];
+            $apellidos = $usuarioSaneado['apellidos'];
+            $email = $usuarioSaneado['email'];
+            $username = $usuarioSaneado['username'];
+            $rol = $usuarioSaneado['rol'];
+    
+            // Llama al servicio de usuarios para registrar al usuario con los datos saneados
             $usuariosService = new UsuariosService();
-
-            
             $resultado = $usuariosService->register($nombre, $apellidos, $email, $username, $contrasena, $rol);
-            
+    
             // Ejecuta la función mostrarBlog()
             $this->mostrarBlog();
-
+    
             // Sal del método registroUsuario()
             return;
-        
-            }
+        }
     }
+
+    public function validarSanear($username, $nombre, $apellidos, $email, $rol) {
+        // Validar los valores
+        $errores = Validacion::validarDatosUsuario($username, $nombre, $apellidos, $email, $rol);
+    
+        // Si hay errores, asignar el mensaje de error a una variable
+        if (!empty($errores)) {
+            $this->mostrarBlog(null, null, $errores); // Pasar los errores como $errorregistro
+            return false; // Indicar que hubo errores
+        }
+    
+        // Saneamiento de los campos
+        $usuarioSaneado = Validacion::sanearCamposUsuario($username, $nombre, $apellidos, $email, $rol);
+       
+        
+        // Devolver los campos saneados
+        return $usuarioSaneado;
+    }
+
     public function login() {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
