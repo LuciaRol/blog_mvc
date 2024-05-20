@@ -78,13 +78,19 @@ class UsuarioController {
         $nuevoRol = $_POST['rol'] ?? '';
     
         // Validar y sanear los datos
-        if (!$this->validarSaneaUsuario($username, $nombre, $apellidos, $email, $nuevoRol)) {
-                
+        $usuarioValidado = $this->validarSaneaUsuario($username, $nombre, $apellidos, $email, $nuevoRol);
+        if (!$usuarioValidado) {
             return;
         }
-        else{
-            // Continuar con la actualización del usuario
-            $resultado = $this->usuariosService->actualizarUsuario($username, $nombre, $apellidos, $email, $nuevoRol);
+
+        // Continuar con la actualización del usuario utilizando los campos saneados
+        $resultado = $this->usuariosService->actualizarUsuario(
+            $usuarioValidado['username'],
+            $usuarioValidado['nombre'],
+            $usuarioValidado['apellidos'],
+            $usuarioValidado['email'],
+            $usuarioValidado['rol']
+        );
             if ($resultado === null) {
                 // Redirigir a mostrar usuario si la actualización es exitosa
                 $this->mostrarUsuario();
@@ -93,7 +99,7 @@ class UsuarioController {
                 $this->mostrarUsuario($resultado);
             }
         }
-    }
+    
 
 
     private function validarSaneaUsuario($username, $nombre, $apellidos, $email, $rol) {
@@ -113,13 +119,11 @@ class UsuarioController {
         $usuarioSaneado = Validacion::sanearCamposUsuario($username, $nombre, $apellidos, $email, $rol);
         
         // Asignar los valores saneados de vuelta a las variables originales
-        $username = $usuarioSaneado['username'];
-        $nombre = $usuarioSaneado['nombre'];
-        $apellidos = $usuarioSaneado['apellidos'];
-        $email = $usuarioSaneado['email'];
-        $rol = $usuarioSaneado['rol'];
-    
-        return true; // Indicar que los campos son válidos y saneados correctamente
+        // Saneamiento de los campos
+        $usuarioSaneado = Validacion::sanearCamposUsuario($username, $nombre, $apellidos, $email, $rol);
+        
+        // Devolver los campos saneados
+        return $usuarioSaneado;
     }
 
     // Función para verificar si el usuario está autenticado
