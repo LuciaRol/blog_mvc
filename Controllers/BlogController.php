@@ -72,7 +72,11 @@ class BlogController {
         // $searchquery para hacer la búsqueda
         $entradas = $this->entradasService->buscarEntradas($searchQuery);
 
+        // Si es null, hacemos el array
+        $entradas = $entradas ?? [];
+
         // Actualizar los datos con las entradas de la búsqueda y la consulta de búsqueda
+        
         $data['entradas'] = $entradas;
         $data['searchQuery'] = $searchQuery;
         $data['noResults'] = empty($entradas);
