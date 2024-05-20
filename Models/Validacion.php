@@ -55,6 +55,58 @@ class Validacion {
         return ['titulo' => $titulo, 'descripcion' => $descripcion, 'categoria' => $categoria, 'fecha' => $fecha];
     }
     
+
+    public static function validarDatosUsuario($username, $nombre, $apellidos, $email, $rol) {
+        $errores = [];
+
+        // Validar campos de usuario usando las funciones de validación ya existentes en la clase Validacion
+        if (empty($username) || trim($username) === '') {
+            $errores['username'] = "El nombre de usuario es obligatorio.";
+        }
+
+        if (empty($nombre) || trim($nombre) === '') {
+            $errores['nombre'] = "El nombre es obligatorio.";
+        }
+
+        if (empty($apellidos) || trim($apellidos) === '') {
+            $errores['apellidos'] = "Los apellidos son obligatorios.";
+        }
+
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $errores['email'] = "El email no es válido.";
+        }
+
+        if (empty($rol) || !in_array($rol, ['admin', 'user'])) {
+            $errores['rol'] = "El rol no es válido.";
+        }
+
+        return $errores;
+    }
+
+    public static function sanearCamposUsuario($username, $nombre, $apellidos, $email, $rol): array {
+        // Aplicar trim a todos los campos para eliminar espacios en blanco al inicio y al final
+        $username = trim($username);
+        $nombre = trim($nombre);
+        $apellidos = trim($apellidos);
+        $email = trim($email);
+        $rol = trim($rol);
+    
+        // Sanear el nombre de usuario
+        $username = self::sanearString($username);
+    
+        // Sanear el nombre
+        $nombre = self::sanearString($nombre);
+    
+        // Sanear los apellidos
+        $apellidos = self::sanearString($apellidos);
+    
+        // Sanear el email
+        $email = filter_var($email, FILTER_SANITIZE_EMAIL);
+    
+        // No es necesario sanear el rol, ya que debería ser una cadena de texto definida ('admin' o 'user')
+    
+        return ['username' => $username, 'nombre' => $nombre, 'apellidos' => $apellidos, 'email' => $email, 'rol' => $rol];
+    }
     
     // Función para sanear strings
     public static function sanearString(string $texto): string {

@@ -9,7 +9,16 @@
 
 <div class="container mt-5">
     <h2>DATOS DEL USUARIO</h2>
-
+    <?php
+    // Verificar si hay errores y mostrar el mensaje
+    if (isset($error_message) && is_array($error_message)) {
+        echo "<ul>";
+        foreach ($error_message as $error) {
+            echo "<li>$error</li>";
+        }
+        echo "</ul>";
+    }
+    ?>
     <div class="row">
         <div class="col-md-6">
             <div class="card">
