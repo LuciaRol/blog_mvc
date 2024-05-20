@@ -6,7 +6,7 @@
     $BlogController = new BlogController();
 
     // Configuración de la paginación
-    $resultadosPorPagina = 5;
+    $resultadosPorPagina = 6;
     $paginaActual = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $totalResultados = count($entradas);
     $paginasTotales = ceil($totalResultados / $resultadosPorPagina);
@@ -26,10 +26,9 @@
 <body>
     <main class="grid-container">
         <div class="content">
-            <h2>Últimos artículos</h2>
-             <!-- Dropdown for selecting category -->
-
-            <form action="<?= BASE_URL ?>?controller=Blog&action=buscarPorCategoria" method="POST">
+            
+            <!-- Formulario para filtrar por categorias -->
+            <form class="filtrar_categoria" action="<?= BASE_URL ?>?controller=Blog&action=buscarPorCategoria" method="POST">
             <label for="categoria">Seleccione una categoría:</label>
                 <select id="categoria" name="categoria">
                     <?php foreach ($categorias as $categoria): ?>
@@ -40,24 +39,39 @@
              <button type="submit" class="search_button">Filtrar Categoria</button>
             </form>
 
-
-
-            <?php if ($noResults): ?>
-                <p>No se ha encontrado nada con la palabra o categoria "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</p>
-            <?php else: ?>
+            <div class="msg_categoria">
+                <?php if ($noResults): ?>
+                    <p >No se ha encontrado nada con la palabra o categoria "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</p>
+                <?php else: ?>
+                    
                 <?php if (!empty($searchQuery)): ?>
-                    <h3>Resultados de búsqueda para "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</h3>
+                    <p>Resultados de búsqueda para "<?php echo htmlspecialchars($searchQuery, ENT_QUOTES, 'UTF-8'); ?>"</p>
                 <?php endif; ?>
+            </div>
+
+            
+
+                <!-- ARTÍCULOS -->
+                <h2>Últimos artículos</h2>
                 <?php if (!empty($entradasPaginadas)): ?>
-                    <ul>
+                    <div class="card-container">
+                        <?php $count = 0; ?>
                         <?php foreach ($entradasPaginadas as $entrada): ?>
-                            <li>
-                                <h3><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h3>
-                                <p><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
-                                <p><?php echo htmlspecialchars($entrada['categoria'], ENT_QUOTES, 'UTF-8'); ?></p>
-                            </li>
+                            <div class="card text-bg-light mb-3" style="max-width: 30rem;">
+                                <div class="card-header"><?php echo htmlspecialchars($entrada['categoria'], ENT_QUOTES, 'UTF-8'); ?></div>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h5>
+                                    <p class="card-text"><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
+                                </div>
+                            </div>
+                            <?php $count++; ?>
+                            <?php if ($count % 2 == 0): ?>
+                                <div class="break"></div>
+                            <?php endif; ?>
                         <?php endforeach; ?>
-                    </ul>
+                    </div>
+
+
                     <!-- Paginación -->
                     <?php if ($paginasTotales > 1): ?>
                         <div class="pagination">
