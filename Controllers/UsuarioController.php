@@ -34,7 +34,7 @@ class UsuarioController {
         $rol = $usuario->getRol();
     
         // Renderiza la vista de usuario pasando las propiedades del usuario
-        $this->pagina->render("Blog/mostrarUsuario", compact('nombre', 'apellidos', 'email', 'username', 'rol'));
+        $this->pagina->render("Usuario/mostrarUsuario", compact('nombre', 'apellidos', 'email', 'username', 'rol'));
     }
     
     

@@ -8,7 +8,7 @@
 <body>
 
 <div class="container mt-5">
-    <h2>ESTA ES LA INFORMACIÓN DEL USUARIO</h2>
+    <h2>DATOS DEL USUARIO</h2>
 
     <div class="row">
         <div class="col-md-6">
