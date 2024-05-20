@@ -35,6 +35,8 @@ class BlogController {
         
         // Miramos si no hay entradas
         $noResults = empty($entradas);
+        // si entradas es null
+        $entradas = $entradas ?? [];
         
          // Obtener las categorías utilizando el servicio de categorías
          $categorias = $this->categoriasService->obtenerCategorias();
