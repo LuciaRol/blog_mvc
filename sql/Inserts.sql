@@ -1,12 +1,10 @@
--- Insertar usuarios
-
 USE blog;
 
+-- Insertar usuarios
 INSERT INTO usuarios (nombre, apellidos, email, username, contrasena, rol) VALUES
 ('Juan', 'Pérez', 'juan@example.com', 'juan', 'contraseña123', 'admin'),
 ('María', 'González', 'maria@example.com', 'maria', 'clave456', 'usur'), 
 ('Pedro', 'Martínez', 'pedro@example.com', 'pedro', 'secreto789', 'usur'); 
-
 
 -- Insertar categorías
 INSERT INTO categorias (nombre) VALUES

@@ -3,7 +3,7 @@
         'name' => 'lucia/blog',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2095c73773a2408f3d305fe84170d7dfc642cc97',
+        'reference' => '9e928924772b956b24e3490bc9ed9f9f860ef75f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'lucia/blog' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2095c73773a2408f3d305fe84170d7dfc642cc97',
+            'reference' => '9e928924772b956b24e3490bc9ed9f9f860ef75f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
