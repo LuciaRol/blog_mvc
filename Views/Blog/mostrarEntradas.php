@@ -6,74 +6,69 @@ use Controllers\BlogController;
 $BlogController = new BlogController();
 
 ?>
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mostrar Entradas</title>
-</head>
+
 <body>
 
 <!-- Formulario para crear nueva entrada -->
-<form method="post" action="<?= BASE_URL ?>?controller=Entrada&action=mostrarEntradas">
-    <label for="titulo">Título:</label><br>
-    <input type="text" id="titulo" name="titulo"><br>
+<form class="entrada-form" method="post" action="<?= BASE_URL ?>?controller=Entrada&action=mostrarEntradas">
+    <h2>Nueva entrada</h2>
+    <label for="titulo" class="form-label">Título:</label><br>
+    <input type="text" id="titulo" name="titulo" class="form-input"><br>
     
-    <label for="descripcion">Descripción:</label><br>
-    <textarea id="descripcion" name="descripcion"></textarea><br>
+    <label for="descripcion" class="form-label">Descripción:</label><br>
+    <textarea id="descripcion" name="descripcion" class="form-textarea"></textarea><br>
     
-    <label for="categoria">Categoría:</label><br>
-    <select id="categoria" name="categoria">
+    <label for="categoria" class="form-label">Categoría:</label><br>
+    <select id="categoria" name="categoria" class="form-select">
         <?php foreach ($categorias as $categoria): ?>
-            <option value="<?php echo $categoria['id']; ?>"><?php echo $categoria['nombre']; ?></option>
+            <option value="<?php echo $categoria['id']; ?>" class="form-option"><?php echo $categoria['nombre']; ?></option>
         <?php endforeach; ?>
     </select><br>
     
-    <input type="submit" value="Enviar">
+    <input type="submit" value="Enviar" class="form-btn">
 </form>
-<?php
-// Verificar si hay errores y mostrar el mensaje
-if (isset($error_message)) {
-    echo "<p>$error_message</p>";
-}
-?>
+
+<?php if (isset($error_message)): ?>
+    <p class="form-error"><?= $error_message ?></p>
+<?php endif; ?>
+
+<h2>Editar entrada</h2>
 
 <!-- Listado de entradas existentes -->
 <?php if (!empty($entradas)): ?>
-    <ul>
+    <ul class="entrada-lista">
         <?php foreach ($entradas as $entrada): ?>
-            <li>
-                <form method="post" action="<?= BASE_URL ?>?controller=Entrada&action=mostrarEntradas">
+            <li class="entrada-item">
+                <form class="entrada-edit-form" method="post" action="<?= BASE_URL ?>?controller=Entrada&action=mostrarEntradas">
                     <input type="hidden" name="entrada_id" value="<?php echo $entrada['entrada_id']; ?>">
                     
-                    <label for="titulo_<?php echo $entrada['entrada_id']; ?>">Título:</label>
-                    <input type="text" id="titulo_<?php echo $entrada['entrada_id']; ?>" name="titulo" value="<?php echo $entrada['titulo']; ?>"><br>
+                    <label for="titulo_<?php echo $entrada['entrada_id']; ?>" class="form-label">Título:</label>
+                    <input type="text" id="titulo_<?php echo $entrada['entrada_id']; ?>" name="titulo" value="<?php echo $entrada['titulo']; ?>" class="form-input"><br>
                     
-                    <label for="descripcion_<?php echo $entrada['entrada_id']; ?>">Descripción:</label>
-                    <textarea id="descripcion_<?php echo $entrada['entrada_id']; ?>" name="descripcion"><?php echo $entrada['descripcion']; ?></textarea><br>
+                    <label for="descripcion_<?php echo $entrada['entrada_id']; ?>" class="form-label">Descripción:</label>
+                    <textarea id="descripcion_<?php echo $entrada['entrada_id']; ?>" name="descripcion" class="form-textarea"><?php echo $entrada['descripcion']; ?></textarea><br>
                     
-                    <label for="categoria<?php echo $entrada['entrada_id']; ?>">Categoría:</label>
-                    <select id="categoria<?php echo $entrada['entrada_id']; ?>" name="categoria">
+                    <label for="categoria<?php echo $entrada['entrada_id']; ?>" class="form-label">Categoría:</label>
+                    <select id="categoria<?php echo $entrada['entrada_id']; ?>" name="categoria" class="form-select">
                         <?php foreach ($categorias as $categoria): ?>
-                            <option value="<?php echo $categoria['id']; ?>" <?php echo ($entrada['categoria'] == $categoria['nombre']) ? 'selected' : ''; ?>>
+                            <option value="<?php echo $categoria['id']; ?>" <?php echo ($entrada['categoria'] == $categoria['nombre']) ? 'selected' : ''; ?> class="form-option">
                                 <?php echo htmlspecialchars($categoria['nombre'], ENT_QUOTES, 'UTF-8'); ?>
                             </option>
                         <?php endforeach; ?>
                     </select><br>
-                    <input type="submit" value="Guardar cambios">
-                    
+                    <input type="submit" value="Guardar cambios" class="form-btn">
                 </form>
                 <form method="post" action="<?= BASE_URL ?>?controller=Entrada&action=eliminarEntrada">
-                        <input type="hidden" name="entrada_id" value="<?php echo $entrada['entrada_id']; ?>">
-                        <input type="submit" value="Eliminar">
-                    </form>
+                    <input type="hidden" name="entrada_id" value="<?php echo $entrada['entrada_id']; ?>">
+                    <input type="submit" value="Eliminar" class="form-btn form-btn-danger">
+                </form>
             </li>
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
-    <p>No hay entradas disponibles.</p>
+    <p class="form-message">No hay entradas disponibles.</p>
 <?php endif; ?>
+
 
 
 </body>

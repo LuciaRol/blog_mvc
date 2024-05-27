@@ -111,7 +111,7 @@ class Validacion {
     // Función para sanear strings
     public static function sanearString(string $texto): string {
         // Filtrar solo letras (mayúsculas y minúsculas), números, ñ, vocales acentuadas y espacios, eliminando otros caracteres
-        return preg_replace('/[^A-Za-z0-9\sáéíóúÁÉÍÓÚñÑÁÉÍÓÚáéíóú]+/u', '', $texto);
+        return preg_replace('/[^A-Za-z0-9\sáéíóúÁÉÍÓÚñÑÁÉÍÓÚáéíóú,.:]+/u', '', $texto);
     }
     
 

@@ -7,24 +7,31 @@
 </head>
 <body>
 
-<h2>Listado de Categorías</h2>
+<div class="form-container">
+    <h2 class="form-titulo">Añadir Nueva Categoría</h2>
 
-<ul>
-    <?php foreach ($categorias as $categoria): ?>
-        <li><?= $categoria['nombre']; ?></li>
-    <?php endforeach; ?>
-</ul>
+    <?php if (!empty($mensaje)): ?>
+        <p class="form-mensaje"><?= htmlspecialchars($mensaje, ENT_QUOTES, 'UTF-8'); ?></p>
+    <?php endif; ?>
 
-<h3>Añadir Nueva Categoría</h3>
+    <form class="categoria-form" method="post" action="<?= BASE_URL ?>?controller=Categoria&action=registroCategoria">
+        <input class="form-input" type="text" name="nueva_categoria" placeholder="Nombre de la nueva categoría">
+        <button class="form-btn" type="submit">Guardar</button>
+    </form>
 
-<?php if (!empty($mensaje)): ?>
-    <p><?= $mensaje ?></p>
-<?php endif; ?>
+    <h2>Listado de Categorías</h2>
 
-<form method="post" action="<?= BASE_URL ?>?controller=Categoria&action=registroCategoria" method="POST">
-    <input type="text" name="nueva_categoria" placeholder="Nombre de la nueva categoría">
-    <button type="submit">Guardar</button>
-</form>
+    <ul class="categoria-lista">
+        <?php foreach ($categorias as $categoria): ?>
+            <li class="categoria-item"><?= htmlspecialchars($categoria['nombre'], ENT_QUOTES, 'UTF-8'); ?></li>
+        <?php endforeach; ?>
+    </ul>
+</div>
+
+
+
+
+
    
 </body>
 </html>

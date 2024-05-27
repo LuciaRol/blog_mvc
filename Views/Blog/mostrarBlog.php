@@ -6,7 +6,7 @@
     $BlogController = new BlogController();
 
     // Configuración de la paginación
-    $resultadosPorPagina = 6;
+    $resultadosPorPagina = 4;
     $paginaActual = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $totalResultados = count($entradas);
     $paginasTotales = ceil($totalResultados / $resultadosPorPagina);
@@ -54,22 +54,21 @@
                 <!-- ARTÍCULOS -->
                 <h2>Últimos artículos</h2>
                 <?php if (!empty($entradasPaginadas)): ?>
-                    <div class="card-container">
+                    <ul class="entrada-lista">
                         <?php $count = 0; ?>
                         <?php foreach ($entradasPaginadas as $entrada): ?>
-                            <div class="card text-bg-light mb-3" style="max-width: 30rem;">
-                                <div class="card-header"><?php echo htmlspecialchars($entrada['categoria'], ENT_QUOTES, 'UTF-8'); ?></div>
-                                <div class="card-body">
-                                    <h5 class="card-title"><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h5>
-                                    <p class="card-text"><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
-                                </div>
-                            </div>
+                            <li class="entrada-item">
+                                <h3 class="entrada-titulo"><?php echo htmlspecialchars($entrada['titulo'], ENT_QUOTES, 'UTF-8'); ?></h3>
+                                <p class="entrada-descripcion"><?php echo htmlspecialchars($entrada['descripcion'], ENT_QUOTES, 'UTF-8'); ?></p>
+                                <p class="entrada-categoria"><strong><?php echo htmlspecialchars($entrada['categoria'], ENT_QUOTES, 'UTF-8'); ?></strong></p>
+                            </li>
                             <?php $count++; ?>
                             <?php if ($count % 2 == 0): ?>
                                 <div class="break"></div>
                             <?php endif; ?>
                         <?php endforeach; ?>
-                    </div>
+                    </ul>
+
 
 
                     <!-- Paginación -->

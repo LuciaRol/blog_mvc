@@ -8,7 +8,7 @@
 <body>
 
 <div class="container mt-5">
-    <h2>DATOS DEL USUARIO</h2>
+    <h2>Datos del usuario</h2>
     <?php
     // Verificar si hay errores y mostrar el mensaje
     if (isset($error_message) && is_array($error_message)) {
@@ -53,7 +53,7 @@
                                 <option value="admin" <?php if ($rol == 'admin') echo 'selected'; ?>>admin</option>
                             </select>
                         </div>
-                        <input type="submit" class="btn btn-primary" value="Guardar">
+                        <input type="submit" class="login_btn btn btn-primary" value="Guardar">
                     </form>
 
                 </div>
