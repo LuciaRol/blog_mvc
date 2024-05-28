@@ -22,17 +22,25 @@ class CategoriaController {
         $this->usuariosService = new UsuariosService();
     }
 
-    public function mostrarCategorias($error=null) {
+    public function mostrarCategorias($error = null) {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()
         if (!$this->sesion_usuario()) {
             return;
         }
 
+        // Obtén el usuario actual
+        $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
+        $esAdmin = ($usuario && $usuario->getRol() === 'admin');
+
         // Obtén los datos de las categorías usando el servicio de categorías
         $categorias = $this->categoriasService->obtenerCategorias();
         
         // Renderiza la vista de categorías pasando los datos obtenidos
-        $this->pagina->render("Blog/mostrarCategorias", ['categorias' => $categorias]);   
+        $this->pagina->render("Blog/mostrarCategorias", [
+            'categorias' => $categorias,
+            'esAdmin' => $esAdmin,
+            'mensaje' => $error
+        ]);
     }
 
     public function registroCategoria() {
