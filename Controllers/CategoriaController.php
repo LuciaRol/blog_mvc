@@ -23,19 +23,18 @@ class CategoriaController {
     }
 
     public function mostrarCategorias($error = null) {
-        // Verifica si el usuario está autenticado usando la función sesion_usuario()
+        // Verifica si el usuario está autenticado 
         if (!$this->sesion_usuario()) {
             return;
         }
 
-        // Obtén el usuario actual
+        // obtiene el usuario que está logeado actualmente y su rol
         $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
         $esAdmin = ($usuario && $usuario->getRol() === 'admin');
 
         // Obtén los datos de las categorías usando el servicio de categorías
         $categorias = $this->categoriasService->obtenerCategorias();
         
-        // Renderiza la vista de categorías pasando los datos obtenidos
         $this->pagina->render("Blog/mostrarCategorias", [
             'categorias' => $categorias,
             'esAdmin' => $esAdmin,

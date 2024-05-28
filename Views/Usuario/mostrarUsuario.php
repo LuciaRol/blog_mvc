@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Datos del usuario</title>
 </head>
 <body>
 
@@ -46,6 +46,7 @@
                             <label for="username" class="form-label">Nombre de usuario:</label>
                             <input type="text" class="form-control" id="username" name="username" value="<?php echo htmlspecialchars($username); ?>">
                         </div>
+                        <?php if ($rol === 'admin'): ?>
                         <div class="mb-3">
                             <label for="rol" class="form-label">Rol:</label>
                             <select class="form-select" id="rol" name="rol">
@@ -53,6 +54,7 @@
                                 <option value="admin" <?php if ($rol == 'admin') echo 'selected'; ?>>admin</option>
                             </select>
                         </div>
+                        <?php endif; ?>
                         <input type="submit" class="login_btn btn btn-primary" value="Guardar">
                     </form>
 
