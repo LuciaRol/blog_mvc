@@ -40,9 +40,5 @@
         public function buscarPorCategoria(string $categoria): ?array {
             // Obtener todas las entradas
             return $this->repository->obtenerentradascategoria($categoria);
-    
-           
-    
-           
         }
     }
