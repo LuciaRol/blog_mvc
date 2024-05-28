@@ -15,6 +15,13 @@
             // Llama al método findAll() del repositorio EntradasComentariosRepository
             return $this->repository->findAll(); // Cambiado entradasComentariosRepository a $repository
         }
+
+        public function findEntradasUser($usuario_id): ?array {
+            // Llama al método findAll() del repositorio EntradasComentariosRepository
+            return $this->repository->findEntradasUser($usuario_id); // Cambiado entradasComentariosRepository a $repository
+        }
+
+
         public function buscarEntradas(string $query): ?array {
             return $this->repository->buscarEntradas($query);
         }

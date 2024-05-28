@@ -40,6 +40,40 @@
         
             return $entradaCommit;
         }
+
+        public function findEntradasUser($usuario_id) {
+            $entradaCommit = null;
+            try {
+                $this->sql = $this->conexion->prepareSQL("SELECT   	
+                                                                entradas.id as entrada_id,
+                                                                entradas.titulo,
+                                                                entradas.descripcion,
+                                                                entradas.fecha,
+                                                                usuarios.nombre,
+                                                                usuarios.apellidos,
+                                                                usuarios.email,
+                                                                usuarios.username,	
+                                                                usuarios.rol,
+                                                                categorias.nombre as categoria
+                                                            FROM entradas 
+                                                            inner join usuarios
+                                                            on usuarios.id = entradas.usuario_id
+                                                            inner join categorias
+                                                            on categorias.id = entradas.categoria_id
+                                                            WHERE usuarios.id = :usuario_id");
+
+                $this->sql->bindValue(':usuario_id', $usuario_id, PDO::PARAM_INT);
+                $this->sql->execute();
+                $entradaCommitData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->sql->closeCursor();
+                $entradaCommit = $entradaCommitData ?: null;
+                
+            } catch (PDOException $e) {
+                $entradaCommit = $e->getMessage();
+            }
+        
+            return $entradaCommit;
+        }
         public function buscarEntradas(string $query): ?array {
             $query = '%' . $query . '%';
             $entradaCommit = null;

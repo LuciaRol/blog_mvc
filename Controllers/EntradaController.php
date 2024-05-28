@@ -31,12 +31,12 @@ class EntradaController {
         if (!$this->sesion_usuario()) {
             return;
         }
-    
+        $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
+        $usuario_id = $usuario->getId();
         // Procesa el formulario de creación o edición de entradas
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo']) && isset($_POST['descripcion']) && isset($_POST['categoria'])) {
             // Obtener el ID del usuario de la sesión
-            $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
-            $usuario_id = $usuario->getId();
+            
             // Obtener datos del formulario
             $titulo = $_POST['titulo'];
             $descripcion = $_POST['descripcion'];
@@ -59,7 +59,7 @@ class EntradaController {
         }
     
         // Obtener los datos del blog
-        $data = $this->obtenerDatosEntradas($error);
+        $data = $this->obtenerDatosEntradas($error, $usuario_id);
     
         // Renderizar la vista mostrando las entradas
         $this->pagina->render("Blog/mostrarEntradas", $data);
@@ -94,9 +94,9 @@ class EntradaController {
         return true; // Indicar que la validación y el saneamiento fueron exitosos
     }
 
-    public function obtenerDatosEntradas($error=null) {
+    public function obtenerDatosEntradas($error=null, $usuario_id=null) {
         // Obtener todas las entradas desde el servicio
-        $entradas = $this->entradasService->findAll();
+        $entradas = $this->entradasService->findEntradasUser($usuario_id);
         
         // Miramos si no hay entradas
         $noResults = empty($entradas);
