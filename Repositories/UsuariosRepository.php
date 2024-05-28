@@ -64,6 +64,24 @@
             }
         }
 
+       
+        public function obtenerUsuarios() {
+            $usuarioData = null;
+            try {
+                $this->sql = $this->conexion->prepareSQL("SELECT * FROM usuarios");
+                
+                $this->sql->execute();
+                $usuarioData = $this->sql->fetchAll(PDO::FETCH_ASSOC);
+                $this->sql->closeCursor();
+                $usuarioCommit = $usuarioData ?: null;
+                
+            } catch (PDOException $e) {
+                $usuarioCommit = $e->getMessage();
+            }
+        
+            return $usuarioCommit;
+        }
+
         public function actualizarUsuario(string $username, string $nombre, string $apellidos, string $email, string $nuevoRol): ?string {
             try {
                 $this->sql = $this->conexion->prepareSQL("UPDATE usuarios SET nombre = :nombre, apellidos = :apellidos, email = :email, rol = :rol WHERE username = :username");

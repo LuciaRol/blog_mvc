@@ -2,9 +2,9 @@ USE blog;
 
 -- Insertar usuarios
 INSERT INTO usuarios (nombre, apellidos, email, username, contrasena, rol) VALUES
-('Juan', 'Pérez', 'juan@example.com', 'juan', 'admin', 'admin'),
-('María', 'González', 'maria@example.com', 'maria', 'clave456', 'usur'), 
-('Pedro', 'Martínez', 'pedro@example.com', 'pedro', 'secreto789', 'usur'); 
+('admin', 'admin', 'admin@admin.com', 'admin', 'admin', 'admin'),
+('usur1', 'usur1', 'usur1@usur1.com', 'usur1', 'usur1', 'usur'), 
+('usur2', 'usur2', 'usur2@usur2.com', 'usur2', 'usur2', 'usur'); 
 
 -- Insertar categorías
 INSERT INTO categorias (nombre) VALUES

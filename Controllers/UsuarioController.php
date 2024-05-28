@@ -36,15 +36,30 @@ class UsuarioController {
     
         // Preparar los datos para renderizar la vista de usuario
         $data = compact('nombre', 'apellidos', 'email', 'username', 'rol');
-
+        
         // Agregar el mensaje de error a los datos si está presente
         if ($error !== null) {
             $data['error_message'] = $error;
         }
+        
+        if ($rol == 'admin'){
+
+            $usuarios = $this->usuariosService->obtenerUsuarios();
+            $data['usuarios'] = $usuarios;
+        }
+
 
     // Renderizar la vista de usuario pasando las propiedades del usuario y el mensaje de error si existe
     $this->pagina->render("Usuario/mostrarUsuario", $data);
     }
+
+    public function obtenerUsuarios(){
+        $usuarios = $this->usuariosService->obtenerUsuarios();
+
+
+
+    }
+
 
 
     public function actualizarUsuario() {
@@ -53,7 +68,7 @@ class UsuarioController {
         $nombre = $_POST['nombre'] ?? '';
         $apellidos = $_POST['apellidos'] ?? '';
         $email = $_POST['email'] ?? '';
-        $nuevoRol = $_POST['rol'] ?? '';
+        $nuevoRol = $_POST['rol'] ?? 'usur'; // Asignar 'usur' como valor predeterminado si $nuevoRol es nulo
     
         // Validar y sanear los datos
         $usuarioValidado = $this->validarSaneaUsuario($username, $nombre, $apellidos, $email, $nuevoRol);

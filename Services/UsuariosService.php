@@ -33,5 +33,10 @@
         public function actualizarUsuario(string $username, string $nombre, string $apellidos, string $email, string $nuevoRol): ?string {
             return $this->userRepository->actualizarUsuario($username, $nombre, $apellidos, $email, $nuevoRol);
         }
+
+        public function obtenerUsuarios(): ?array {
+            return $this->userRepository->obtenerUsuarios();
+        }
+        
         
     }

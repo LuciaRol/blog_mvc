@@ -62,6 +62,39 @@
             </div>
         </div>
     </div>
+<!-- Mostrar la tabla de usuarios solo si el rol es 'admin' -->
+<?php if ($rol === 'admin'): ?>
+<div class="row">
+    <div class="col-md-12">
+        <h3>Listado de Usuarios</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Email</th>
+                    <th>Nombre de usuario</th>
+                    <th>Rol</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($usuarios as $usuario): ?>
+                <tr>
+                    <td><?php echo $usuario['id']; ?></td>
+                    <td><?php echo htmlspecialchars($usuario['nombre']); ?></td>
+                    <td><?php echo htmlspecialchars($usuario['apellidos']); ?></td>
+                    <td><?php echo htmlspecialchars($usuario['email']); ?></td>
+                    <td><?php echo htmlspecialchars($usuario['username']); ?></td>
+                    <td><?php echo htmlspecialchars($usuario['rol']); ?></td>
+                </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+<?php endif; ?>
+
 </div>
 
 </body>
