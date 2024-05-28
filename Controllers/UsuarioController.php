@@ -56,11 +56,7 @@ class UsuarioController {
     public function obtenerUsuarios(){
         $usuarios = $this->usuariosService->obtenerUsuarios();
 
-
-
     }
-
-
 
     public function actualizarUsuario() {
         // Recibir datos del formulario

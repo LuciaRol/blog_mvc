@@ -86,7 +86,21 @@
                     <td><?php echo htmlspecialchars($usuario['apellidos']); ?></td>
                     <td><?php echo htmlspecialchars($usuario['email']); ?></td>
                     <td><?php echo htmlspecialchars($usuario['username']); ?></td>
-                    <td><?php echo htmlspecialchars($usuario['rol']); ?></td>
+                    <td>
+                        <form action="<?= BASE_URL ?>?controller=Usuario&action=actualizarUsuario" method="post">
+                            <input type="hidden" name="id" value="<?php echo $usuario['id']; ?>">
+                            <input type="hidden" name="nombre" value="<?php echo htmlspecialchars($usuario['nombre']); ?>">
+                            <input type="hidden" name="apellidos" value="<?php echo htmlspecialchars($usuario['apellidos']); ?>">
+                            <input type="hidden" name="email" value="<?php echo htmlspecialchars($usuario['email']); ?>">
+                            <input type="hidden" name="username" value="<?php echo htmlspecialchars($usuario['username']); ?>">
+                            <input type="hidden" name="rol_original" value="<?php echo htmlspecialchars($usuario['rol']); ?>">
+                            <select name="rol">
+                                <option value="admin" <?php if ($usuario['rol'] === 'admin') echo 'selected'; ?>>admin</option>
+                                <option value="usur" <?php if ($usuario['rol'] === 'usur') echo 'selected'; ?>>usur</option>
+                            </select>
+                            <input type="submit" value="Guardar">
+                        </form>
+                    </td>
                 </tr>
                 <?php endforeach; ?>
             </tbody>
