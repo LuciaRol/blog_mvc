@@ -26,8 +26,7 @@ INSERT INTO entradas (usuario_id, categoria_id, titulo, descripcion, fecha) VALU
 
 Este misterioso bólido se trata de un meteoro muy brillante, caracterizado por parecer una bola de fuego y crear una estela luminosa por la zona en la que pasa, producida por la fricción a su entrada en la atmósfera terrestre. El término bola de fuego se refiere a cualquier meteoro excepcionalmente brillante en el cielo. En concreto, si su brillo supera el de Venus en el cielo nocturno, indica que el meteoroide original era más grande de lo común. 
 
-El evento, registrado a partir de la medianoche, ha sido grabado por varias cámaras de observatorios a lo largo de la península.
-Fuente: httpswww.rtve.esnoticias20240519bolidocruzacielopeninsulaiberica16109650.shtml", NULL),
+El evento, registrado a partir de la medianoche, ha sido grabado por varias cámaras de observatorios a lo largo de la península.", NULL),
 (1, 7, "Binoculares 7x50 Cometron Celestron", "Los Cometron son ideales para la astronomía y la observación crepuscular.
 
 Estos clásicos binoculares de Porro ofrecen la imagen más luminosa: el haz de luz que sale del ocular la llamada pupila de salida tiene un diámetro de siete milímetros, el mismo que sus pupilas cuando se abren al máximo por la noche. Esto significa que no se desperdicia ninguna luz y se pueden ver claramente objetos tenues como nebulosas o cometas, así como los animales al anochecer. Las lentes multicoated garantizan una alta transmisión y evitan los molestos reflejos.
@@ -65,5 +64,4 @@ https:www.astroshop.esrevistaguiadecompralagranguiadecompralosmejorestelescopios
 
 La Administración Nacional Oceánica y Atmosférica NOAA de Estados Unidos ha advertido de que la tormenta geomagnética más fuerte de los últimos 20 años ha golpeado la Tierra, haciendo que la aurora boreal sea visible en latitudes geomagnéticas mucho más bajas de lo habitual.
 
-La Agencia Estatal de Meteorología Aemet ha confirmado esta madrugada que se están observando auroras polares a latitudes muy bajas del hemisferio norte, incluida España y que hay multitud de fotografías que así lo atestiguan.
-Fuente: https:www.rtve.esnoticias20240511auroraborealalumbracielosnocturnosespanaeuropa16098906.shtml", NULL);
+La Agencia Estatal de Meteorología Aemet ha confirmado esta madrugada que se están observando auroras polares a latitudes muy bajas del hemisferio norte, incluida España y que hay multitud de fotografías que así lo atestiguan.", NULL);
