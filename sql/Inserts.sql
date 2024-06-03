@@ -46,8 +46,7 @@ Por lo tanto, aunque Plutón sigue siendo un cuerpo celestial fascinante y un ob
 
 Este hielo no se encuentra en depósitos de gran continuidad lateral, sino que lo hace como parches salpicando la superficie, de una manera muy heterogénea, ocupando aproximadamente un 4.1 de toda la superficie que tiene las condiciones adecuadas para preservarlo. 
 
-Por qué tienen esta distribución los depósitos de hielo. Podría ser que el depósito de este hielo ocurriera muy pronto en la historia de la Luna, siendo depósitos de un tamaño y continuidad espacial mucho mayor, pero que el continuo bombardeo de micrometeoritos haya provocado que una gran parte del hielo se pierda al espacio.
-Fuente: https:www.ungeologoenapuros.es201910cualeselorigendelhieloenlasuperficielunar", NULL),
+Por qué tienen esta distribución los depósitos de hielo. Podría ser que el depósito de este hielo ocurriera muy pronto en la historia de la Luna, siendo depósitos de un tamaño y continuidad espacial mucho mayor, pero que el continuo bombardeo de micrometeoritos haya provocado que una gran parte del hielo se pierda al espacio.", NULL),
 (2, 7, "Telescopios para principiantes", "Existen diversos tipos de telescopios. Para iniciarse en la astronomía le recomendamos uno de lentes con poca apertura, que es perfecto para observar la Luna y los planetas. Y cuando quiera profundizar un poco más, un telescopio de espejos con más apertura para la observación de nebulosas y galaxias.
 
 Se preguntará si los telescopios de espejos también sirven para observación lunar y planetaria: por supuesto. De hecho, también puede disfrutar de nebulosas y galaxias con un telescopio de lentes, aunque para esta finalidad es mucho mejor un espejo más grande porque capta más luz y permite ver mejor los objetos.
@@ -58,8 +57,7 @@ Los telescopios de lentes seleccionados se suministran con monturas muy intuitiv
 Los telescopios de espejos descansan sobre robustas monturas Dobson, que incluyen un asa.
 Algunos telescopios están equipados con sistemas digitales de navegación, que simplifican sobremanera la búsqueda de objetos.
 Si el presupuesto es ajustado, con unos binoculares también puede observar muchos objetos celestes.
-Pero basta de teoría, pasemos a la práctica. Estos son nuestros telescopios intuitivos para unos inicios fáciles en el mundo de la astronomía.
-https:www.astroshop.esrevistaguiadecompralagranguiadecompralosmejorestelescopiosparaprincipiantesi,1598", NULL),
+Pero basta de teoría, pasemos a la práctica. Estos son nuestros telescopios intuitivos para unos inicios fáciles en el mundo de la astronomía.", NULL),
 (3, 1, "Auroras boreales en España", "Una aurora boreal ha sido visible en la noche de este viernes en los cielos de gran parte de España, al menos desde Andalucía a Cataluña, Aragón, Galicia y la Comunidad Valenciana, según han publicado en las redes sociales diversos observatorios meteorológicos y astronómicos.
 
 La Administración Nacional Oceánica y Atmosférica NOAA de Estados Unidos ha advertido de que la tormenta geomagnética más fuerte de los últimos 20 años ha golpeado la Tierra, haciendo que la aurora boreal sea visible en latitudes geomagnéticas mucho más bajas de lo habitual.

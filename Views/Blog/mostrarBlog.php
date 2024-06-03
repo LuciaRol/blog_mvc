@@ -1,4 +1,5 @@
 <?php
+
     // Incluir el controlador
     use Controllers\BlogController;
 
@@ -95,6 +96,7 @@
             <?php endif; ?>
         </div>
 
+        <!-- Formulario de registro -->
         <aside class="sidebar">
             <h3 class="sidebar_title">¡Regístrate ahora!</h3>
             <?php

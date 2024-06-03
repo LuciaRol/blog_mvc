@@ -124,6 +124,24 @@ header .login_btn:hover{
 	margin-left: 15px;
 }
 
+.search_button{
+    padding: 0.2rem;
+	background-color: var(--contrast);
+	border-radius: 2px;
+	cursor:pointer;
+}
+
+.search_button:focus{
+	outline: 2px solid var(--secondary);
+	border-radius: 2px;
+}
+
+.search_button:hover{
+	background-color: rgb(63, 29, 96);
+	border: 1px solid gainsboro;
+	color: var(--text-title);
+}
+
 /* LISTA DE ENTRADAS */
 .entrada-lista {
     list-style-type: none;
