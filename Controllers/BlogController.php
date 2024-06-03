@@ -56,14 +56,21 @@ class BlogController {
         // Obtener los datos para el blog
         $data = $this->obtenerDatosBlog($error);
         
+        // Verificar si el usuario ha iniciado sesión
+        $usuarioAutenticado = isset($_SESSION['username']);
+    
         // Si hay un error, agregarlo a los datos para ser renderizado
         if ($errorregistro !== null) {
             $data['error_registro'] = $errorregistro;
         }
-        
+    
+        // Si el usuario ha iniciado sesión, establecer una variable para indicarlo
+        $data['usuario_autenticado'] = $usuarioAutenticado;
+    
         // Instanciar la clase Pages para renderizar la vista
         $this->pagina->render("Blog/mostrarBlog", $data);   
     }
+    
 
     public function buscar() {
         $searchQuery = isset($_POST['q']) ? $_POST['q'] : '';
@@ -208,6 +215,7 @@ class BlogController {
         // Llama a mostrarBlog con el posible mensaje de error del login y la variable $usuarioRecordado
         $this->mostrarBlog($error, $usuarioRecordado);
     }
+
 
     public function logout() {
         session_start();

@@ -1,4 +1,4 @@
-<?php
+<h4?php
 // Incluir el controlador
 use Controllers\BlogController;
 
@@ -32,10 +32,11 @@ $BlogController = new BlogController();
     <p class="form-error"><?= $error_message ?></p>
 <?php endif; ?>
 
-<h2>Editar entrada</h2>
+
 
 <!-- Listado de entradas existentes -->
 <?php if (!empty($entradas)): ?>
+    <h2>Editar entrada</h2>
     <ul class="entrada-lista">
         <?php foreach ($entradas as $entrada): ?>
             <li class="entrada-item">
@@ -66,7 +67,8 @@ $BlogController = new BlogController();
         <?php endforeach; ?>
     </ul>
 <?php else: ?>
-    <p class="form-message">No hay entradas disponibles.</p>
+    <h4 class="form-message" style="display: flex; justify-content: center;">No hay entradas disponibles para editar. Primero has de escribir una nueva.</h4>
+
 <?php endif; ?>
 
 

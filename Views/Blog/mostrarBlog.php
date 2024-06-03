@@ -7,7 +7,7 @@
     $BlogController = new BlogController();
 
     // Configuración de la paginación
-    $resultadosPorPagina = 4;
+    $resultadosPorPagina = 2;
     $paginaActual = isset($_GET['page']) ? intval($_GET['page']) : 1;
     $totalResultados = count($entradas);
     $paginasTotales = ceil($totalResultados / $resultadosPorPagina);
@@ -16,14 +16,6 @@
 
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-</head>
 <body>
     <main class="grid-container">
         <div class="content">
@@ -97,7 +89,9 @@
         </div>
 
         <!-- Formulario de registro -->
+        
         <aside class="sidebar">
+        <?php if (!$usuario_autenticado): ?>
             <h3 class="sidebar_title">¡Regístrate ahora!</h3>
             <?php
             // Verificar si hay errores de registro y mostrar el mensaje
@@ -119,10 +113,11 @@
                 <input type="password" class="sidebar_input" placeholder="Contraseña" name="contrasena">
                 <button type="submit" class="sidebar_btn" name="registro">Registrarse</button>
 
-           
             </div>
             </form>
-        </aside>       
+            <?php endif; ?>  
+        </aside>  
+           
     </main>
 </body>
 

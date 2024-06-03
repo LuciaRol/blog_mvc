@@ -91,6 +91,16 @@ header .search_container input:focus, header .login_container input:focus{
 	border-radius: 2px;
 }
 
+header .login_container {
+    display: flex;
+    align-items: center; 
+    gap: 1rem; 
+}
+
+header .hola {
+    margin: 0; 
+}
+
 header .login_btn{
 	padding: 0.2rem;
 	background-color: var(--contrast);
@@ -108,6 +118,8 @@ header .login_btn:hover{
 	border: 1px solid gainsboro;
 	color: var(--text-title);
 }
+
+
 
 /* MAIN */
 
@@ -143,6 +155,7 @@ header .login_btn:hover{
 }
 
 /* LISTA DE ENTRADAS */
+
 .entrada-lista {
     list-style-type: none;
     padding: 0;
@@ -175,6 +188,11 @@ header .login_btn:hover{
 
 .break {
     display: none;
+}
+
+/* títulos */
+h2{
+    padding: 20px;
 }
 
 /* Estilo responsivo */
@@ -420,6 +438,8 @@ h2{
         width: 90%;
     }
 }
+
+
 
 
 
