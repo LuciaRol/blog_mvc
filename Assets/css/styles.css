@@ -123,8 +123,8 @@ header .login_btn:hover{
 
 /* MAIN */
 
-.grid-container {
-	height: 100vh;
+.grid-container {/* 
+	height: 100vh; */
 	display: grid;
 	grid-template-columns: 4fr 1fr; 
 	grid-gap: 20px; 
@@ -439,7 +439,14 @@ h2{
     }
 }
 
-
+/* FOOTER */
+footer {
+	position: relative;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	padding: 10px 0;
+}
 
 
 
