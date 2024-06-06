@@ -18,7 +18,7 @@ class UsuarioController {
         $this->usuariosService = new UsuariosService();
     }
 
-    public function mostrarUsuario($error=null) {
+    public function mostrarUsuario($error=null):void {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()
         if (!$this->sesion_usuario()) {
             return;
@@ -53,12 +53,12 @@ class UsuarioController {
     $this->pagina->render("Usuario/mostrarUsuario", $data);
     }
 
-    public function obtenerUsuarios(){
-        $usuarios = $this->usuariosService->obtenerUsuarios();
+    public function obtenerUsuarios(): array|null{
+        return $usuarios = $this->usuariosService->obtenerUsuarios();
 
     }
 
-    public function actualizarUsuario() {
+    public function actualizarUsuario():void {
         // Recibir datos del formulario
         $username = $_POST['username'] ?? '';
         $nombre = $_POST['nombre'] ?? '';
@@ -91,7 +91,7 @@ class UsuarioController {
     
 
 
-    public function validarSaneaUsuario($username, $nombre, $apellidos, $email, $rol) {
+    public function validarSaneaUsuario($username, $nombre, $apellidos, $email, $rol):array|bool {
         // Validar los valores
         $errores = Validacion::validarDatosUsuario($username, $nombre, $apellidos, $email, $rol);
     
@@ -121,7 +121,7 @@ class UsuarioController {
     }
 
     // Reutilización de la función login() del BlogController
-    public function login() {
-        return (new BlogController())->login();
+    public function login():void {
+        (new BlogController())->login();
     }
 }

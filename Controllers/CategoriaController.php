@@ -22,7 +22,7 @@ class CategoriaController {
         $this->usuariosService = new UsuariosService();
     }
 
-    public function mostrarCategorias($error = null) {
+    public function mostrarCategorias($error = null):void {
         // Verifica si el usuario está autenticado 
         if (!$this->sesion_usuario()) {
             return;
@@ -30,7 +30,10 @@ class CategoriaController {
 
         // obtiene el usuario que está logeado actualmente y su rol
         $usuario = $this->usuariosService->obtenerUsuarioPorNombreDeUsuario($_SESSION['username']);
-        $esAdmin = ($usuario && $usuario->getRol() === 'admin');
+        $rolUsuario = $usuario->getRol();
+    
+        // Verifica si el rol del usuario es 'admin'
+        $esAdmin = $rolUsuario === 'admin' ? true : false;
 
         // Obtén los datos de las categorías usando el servicio de categorías
         $categorias = $this->categoriasService->obtenerCategorias();
@@ -42,7 +45,7 @@ class CategoriaController {
         ]);
     }
 
-    public function registroCategoria() {
+    public function registroCategoria():void {
         $mensaje = ''; // Inicializamos la variable de mensaje
         
         // Verifica si el usuario está autenticado
@@ -63,14 +66,8 @@ class CategoriaController {
             }
         }
         
-        // Obtener las categorías para mostrar en la vista
-        $categorias = $this->categoriasService->obtenerCategorias();
-        
-        // Pasar las categorías y el mensaje a la vista
-        $data = ['categorias' => $categorias, 'mensaje' => $mensaje];
-        
         // Renderizar la vista
-        $this->pagina->render("Blog/mostrarCategorias", $data);
+        $this->mostrarCategorias();
     }
 
     // Reutilización de la función sesion_usuario() del BlogController
@@ -79,7 +76,7 @@ class CategoriaController {
     }
 
     // Reutilización de la función login() del BlogController
-    private function login() {
-        return (new BlogController())->login();
+    private function login():void {
+        (new BlogController())->login();
     }
 }

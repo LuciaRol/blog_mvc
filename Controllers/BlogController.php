@@ -29,7 +29,7 @@ class BlogController {
 
     }
 
-    public function obtenerDatosBlog($error=null) {
+    public function obtenerDatosBlog($error=null):array {
         // Obtener todas las entradas desde el servicio
         $entradas = $this->entradasService->findAll();
         
@@ -52,7 +52,7 @@ class BlogController {
     }
     
     
-    public function mostrarBlog($error=null, $usuarioRecordado=null, $errorregistro = null) {
+    public function mostrarBlog($error=null, $usuarioRecordado=null, $errorregistro = null):void {
         // Obtener los datos para el blog
         $data = $this->obtenerDatosBlog($error);
         
@@ -72,7 +72,7 @@ class BlogController {
     }
     
 
-    public function buscar() {
+    public function buscar():void {
         $searchQuery = isset($_POST['q']) ? $_POST['q'] : '';
     
         // Obtener los datos para el blog
@@ -95,7 +95,7 @@ class BlogController {
         $this->pagina->render("Blog/mostrarBlog", $data);
     }
 
-    public function buscarPorCategoria() {
+    public function buscarPorCategoria():void {
         // Obtener la categoría seleccionada
         $selectedCategory = isset($_POST['categoria']) ? $_POST['categoria'] : '';
     
@@ -131,7 +131,7 @@ class BlogController {
     }
     
     
-    public function registroUsuario() {
+    public function registroUsuario():void {
         // Verifica si se ha enviado el formulario de registro
         if (isset($_POST['registro'])) {
             // Obtiene los datos del formulario
@@ -169,7 +169,7 @@ class BlogController {
         }
     }
 
-    public function validarSanear($username, $nombre, $apellidos, $email, $rol) {
+    public function validarSanear($username, $nombre, $apellidos, $email, $rol):array|bool {
         // Validar los valores
         $errores = Validacion::validarDatosUsuario($username, $nombre, $apellidos, $email, $rol);
     
@@ -187,7 +187,7 @@ class BlogController {
         return $usuarioSaneado;
     }
 
-    public function login() {
+    public function login():void {
         $username = $_POST['username'] ?? '';
         $password = $_POST['password'] ?? '';
         $error = ''; // Creamos esta variable para que si todo va bien, no de error al mostrarBlog
@@ -217,7 +217,7 @@ class BlogController {
     }
 
 
-    public function logout() {
+    public function logout():void {
         session_start();
         session_destroy();
         $this->mostrarBlog(); // vuelve al origen y cierra la sesion. No puede cerrar sesion estando en otras instancias dado que no debería tener acceso
@@ -239,7 +239,7 @@ class BlogController {
         return true; // Retorna true si el usuario está autenticado
     }
 
-    public function mostrarblogsesion($error=null) {
+    public function mostrarblogsesion($error=null):void {
         // Verifica si el usuario está autenticado usando la función sesion_usuario()
         if ($this->sesion_usuario()) {
             // Si el usuario está autenticado, llama a la función mostrarBlog()

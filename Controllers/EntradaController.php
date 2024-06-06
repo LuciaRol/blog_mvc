@@ -26,7 +26,7 @@ class EntradaController {
     }
 
     // Función para mostrar las entradas del blog
-    public function mostrarEntradas($error=null) {
+    public function mostrarEntradas($error=null):void {
         // Verifica si el usuario está autenticado
         if (!$this->sesion_usuario()) {
             return;
@@ -65,7 +65,7 @@ class EntradaController {
         $this->pagina->render("Blog/mostrarEntradas", $data);
     }
     
-    private function validasanea(&$titulo, &$descripcion, &$categoria_id, &$fecha) {
+    private function validasanea(&$titulo, &$descripcion, &$categoria_id, &$fecha):bool {
         // Validar los valores
         $errores = Validacion::validar($titulo, $descripcion, $categoria_id, $fecha);
         if (!empty($errores)) {
@@ -94,7 +94,7 @@ class EntradaController {
         return true; // Indicar que la validación y el saneamiento fueron exitosos
     }
 
-    public function obtenerDatosEntradas($error=null, $usuario_id=null) {
+    public function obtenerDatosEntradas($error=null, $usuario_id=null):array {
         // Obtener todas las entradas desde el servicio
         $entradas = $this->entradasService->findEntradasUser($usuario_id);
         
@@ -117,7 +117,7 @@ class EntradaController {
         return $data;
     }
     // Función para eliminar una entrada del blog
-    public function eliminarEntrada() {
+    public function eliminarEntrada():void {
         // Verificar si se recibió un ID de entrada válido
         if (isset($_POST['entrada_id'])) {
             $entrada_id = $_POST['entrada_id'];
@@ -139,7 +139,7 @@ class EntradaController {
     }
 
     // Reutilización de la función login() del BlogController
-    private function login() {
-        return (new BlogController())->login();
+    private function login():void {
+        (new BlogController())->login();
     }
 }
