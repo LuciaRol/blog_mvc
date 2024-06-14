@@ -3,7 +3,7 @@
         'name' => 'lucia/blog',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '9e928924772b956b24e3490bc9ed9f9f860ef75f',
+        'reference' => '6d748a8640d277657904fbb68fcf3a8385a68675',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -22,7 +22,7 @@
         'lucia/blog' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '9e928924772b956b24e3490bc9ed9f9f860ef75f',
+            'reference' => '6d748a8640d277657904fbb68fcf3a8385a68675',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -31,49 +31,49 @@
         'pagerfanta/core' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'pagerfanta/doctrine-collections-adapter' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'pagerfanta/doctrine-dbal-adapter' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'pagerfanta/doctrine-mongodb-odm-adapter' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'pagerfanta/doctrine-orm-adapter' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'pagerfanta/doctrine-phpcr-odm-adapter' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'pagerfanta/elastica-adapter' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'pagerfanta/pagerfanta' => array(
-            'pretty_version' => 'v4.5.0',
-            'version' => '4.5.0.0',
-            'reference' => 'ab85ad0ac605d59d6263f49db9584254e159c37f',
+            'pretty_version' => 'v4.6.0',
+            'version' => '4.6.0.0',
+            'reference' => '155317cf06e0a01f7567d5381fc89fdd7df6f60d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../pagerfanta/pagerfanta',
             'aliases' => array(),
@@ -82,13 +82,13 @@
         'pagerfanta/solarium-adapter' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'pagerfanta/twig' => array(
             'dev_requirement' => false,
             'replaced' => array(
-                0 => 'v4.5.0',
+                0 => 'v4.6.0',
             ),
         ),
         'phpoption/phpoption' => array(
@@ -106,6 +106,15 @@
             'reference' => 'b99fb5c887a2fb985b48d2f3844cf73011090213',
             'type' => 'library',
             'install_path' => __DIR__ . '/../stefangabos/zebra_pagination',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'symfony/deprecation-contracts' => array(
+            'pretty_version' => 'v3.5.0',
+            'version' => '3.5.0.0',
+            'reference' => '0e0d29ce1f20deffb4ab1b016a7257c4f1e789a1',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../symfony/deprecation-contracts',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
